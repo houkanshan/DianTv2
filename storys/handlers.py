@@ -13,15 +13,13 @@ class StorysHandler(BaseHandler):
     model = Story
     storys = Story.objects
 
-    #attr to included, really do not know how to exclude
-    #fields = ('id', 'author', 'create_on', 'title',
-            #('content',
-                #('img_veritcal', 'img_horizontal', 'img_url', 'text', 'id')))
+    fields = ('id', 'title', 'author', 'text', 'img_url',
+            'img_horizontal', 'img_veritcal', 'create_on')
 
     def read(self, request):
-    #def read(self, request):
         '''
         get storys from index to index+limit-1
+        Sample: GET /api/storys/?index=0&limit=2
         '''
         GET = self.flatten_dict(request.GET)
         index = 0
@@ -36,7 +34,8 @@ class StorysHandler(BaseHandler):
 
     def create(self, request):
         '''
-        post storys, no use
+        post storys,
+        Current fobidden
         '''
         GET = self.flatten_dict(request.GET)
         POST = self.flatten_dict(request.POST)
@@ -45,7 +44,8 @@ class StorysHandler(BaseHandler):
 
     def delete(self, request):
         '''
-        delete storys, can't do this
+        delete storys
+        Current fobidden
         '''
         print "get delete"
         GET = self.flatten_dict(request.GET)
@@ -54,7 +54,8 @@ class StorysHandler(BaseHandler):
 
     def update(self, request):
         '''
-        put storys, can't do this
+        put storys
+        Current fobidden
         '''
         GET = self.flatten_dict(request.GET)
         POST = self.flatten_dict(request.POST)
@@ -62,8 +63,17 @@ class StorysHandler(BaseHandler):
         return rc.FORBIDDEN
 
 class StoryHandler(BaseHandler):
+    """ get Story """
+    model = Story
+    storys = Story.objects
+
+    fields = ('id', 'title', 'author', 'text', 'img_url',
+            'img_horizontal', 'img_veritcal', 'create_on')
+
     def read(self, request):
         '''
+        read a story from id
+        Sample: GET /api/?id=1
         '''
         GET = self.flatten_dict(request.GET)
         if('id' not in GET):
@@ -72,34 +82,51 @@ class StoryHandler(BaseHandler):
         try:
             id = GET['id']
         except:
+            return rc.BAD_REQUEST
+
+        try:
+            got_story = self.storys.get(id=id)
+        except:
             return rc.NOT_FOUND
 
-        return self.storys.get(id=id)
+        return got_story
 
     def create(self, request):
         '''
+        create a story
+        Sample: POST /api/story/
+                {
+                    title: 'xxx',
+                    author: 'houks',
+                    text: 'aaaaaaaa',
+                    img_url: 'www.a.com/a.png', //optional
+                    img_horizontal: 'l',        //optional
+                    img_veritcal: 't'           //optional
+                    }
+                }
         '''
+
         GET = self.flatten_dict(request.GET)
         POST = self.flatten_dict(request.POST)
+        #pdb.set_trace();
 
         if ('title' not in POST) or \
                 ('author' not in POST) or \
-                ('content' not in POST) or \
-                ('text' not in POST['content']):
+                ('text' not in POST):
             return rc.BAD_REQUEST
 
         title = POST['title']
         author = POST['author']
-        text = POST['content']['text']
+        text = POST['text']
 
         new_story = Story(title=title, author=author, text=text)
 
-        if 'img_url' in POST['content']:
-            new_story.img_url = POST['content']['img_url']
-            if 'img_vertical' in POST['content']:
-                new_story.img_horizontal = POST['content']['img_veritcal']
-            if 'img_horizontal' in POST['content']:
-                new_story.img_horizontal = POST['content']['img_horizontal']
+        if 'img_url' in POST:
+            new_story.img_url = POST['img_url']
+            if 'img_vertical' in POST:
+                new_story.img_horizontal = POST['img_veritcal']
+            if 'img_horizontal' in POST:
+                new_story.img_horizontal = POST['img_horizontal']
 
         new_story.save()
 
@@ -107,7 +134,8 @@ class StoryHandler(BaseHandler):
 
     def delete(self, request):
         '''
-        by id
+        delete by id
+        Sample: DELETE /api/story/?id=1
         '''
         GET = self.flatten_dict(request.GET)
         if('id' not in GET):
@@ -115,22 +143,40 @@ class StoryHandler(BaseHandler):
 
         try:
             id = GET['id']
-            toDel = self.storys.get(id=id)
-            toDel.delete()
-            return rc.DELETED
         except:
             return rc.BAD_REQUEST
 
+        try:
+            to_del = self.storys.get(id=id)
+            to_del.delete()
+            return rc.DELETED
+        except:
+            return rc.NOT_FOUND
+
     def update(self, request):
         '''
+        update by id
+        Sample: PUT /api/story/?id=1
+                {
+                    title: 'xxx',
+                    author: 'houks',
+                    text: 'aaaaaaaa',
+                    img_url: 'www.a.com/a.png', //optional
+                    img_horizontal: 'l',        //optional
+                    img_veritcal: 't'           //optional
+                }
         '''
         GET = self.flatten_dict(request.GET)
         POST = self.flatten_dict(request.POST)
 
         try:
             id = GET['id']
-            update = GET['update']
-            update_story = this.storys.get(id=id)
+            #update = GET['update']
+        except:
+            rc.BAD_REQUEST
+
+        try:
+            update_story = self.storys.get(id=id)
         except:
             return rc.NOT_FOUND
 
@@ -138,14 +184,14 @@ class StoryHandler(BaseHandler):
         try:
             update_story.title = POST['title']
             update_story.author = POST['author']
-            update_story.text = POST['content']['text']
+            update_story.text = POST['text']
 
-            if 'img_url' in POST['content']:
-                update_story.img_url = POST['content']['img_url']
-                if 'img_vertical' in POST['content']:
-                    update_story.img_horizontal = POST['content']['img_veritcal']
-                if 'img_horizontal' in POST['content']:
-                    update_story.img_horizontal = POST['content']['img_horizontal']
+            if 'img_url' in POST:
+                update_story.img_url = POST['img_url']
+                if 'img_vertical' in POST:
+                    update_story.img_horizontal = POST['img_veritcal']
+                if 'img_horizontal' in POST:
+                    update_story.img_horizontal = POST['img_horizontal']
         except:
             return rc.BAD_REQUEST
 
