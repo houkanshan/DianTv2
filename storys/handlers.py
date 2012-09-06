@@ -10,6 +10,8 @@ import pdb
 
 class StorysHandler(BaseHandler):
     """ get Storys """
+    allowd_methods = ('GET', 'POST', )
+
     model = Story
     storys = Story.objects
 
@@ -34,76 +36,17 @@ class StorysHandler(BaseHandler):
 
     def create(self, request):
         '''
-        post storys,
-        Current fobidden
-        '''
-        GET = self.flatten_dict(request.GET)
-        POST = self.flatten_dict(request.POST)
-
-        return rc.FORBIDDEN
-
-    def delete(self, request):
-        '''
-        delete storys
-        Current fobidden
-        '''
-        print "get delete"
-        GET = self.flatten_dict(request.GET)
-
-        return rc.FORBIDDEN
-
-    def update(self, request):
-        '''
-        put storys
-        Current fobidden
-        '''
-        GET = self.flatten_dict(request.GET)
-        POST = self.flatten_dict(request.POST)
-
-        return rc.FORBIDDEN
-
-class StoryHandler(BaseHandler):
-    """ get Story """
-    model = Story
-    storys = Story.objects
-
-    fields = ('id', 'title', 'author', 'text', 'img_url',
-            'img_horizontal', 'img_veritcal', 'create_on')
-
-    def read(self, request):
-        '''
-        read a story from id
-        Sample: GET /api/?id=1
-        '''
-        GET = self.flatten_dict(request.GET)
-        if('id' not in GET):
-            return rc.BAD_REQUEST
-
-        try:
-            id = GET['id']
-        except:
-            return rc.BAD_REQUEST
-
-        try:
-            got_story = self.storys.get(id=id)
-        except:
-            return rc.NOT_FOUND
-
-        return got_story
-
-    def create(self, request):
-        '''
         create a story
-        Sample: POST /api/story/
-                {
-                    title: 'xxx',
-                    author: 'houks',
-                    text: 'aaaaaaaa',
-                    img_url: 'www.a.com/a.png', //optional
-                    img_horizontal: 'l',        //optional
-                    img_veritcal: 't'           //optional
-                    }
-                }
+        Sample: POST /api/storys/
+        {
+            title: 'xxx',
+            author: 'houks',
+            text: 'aaaaaaaa',
+            img_url: 'www.a.com/a.png', //optional
+            img_horizontal: 'l',        //optional
+            img_veritcal: 't'           //optional
+            }
+        }
         '''
 
         GET = self.flatten_dict(request.GET)
@@ -134,17 +77,66 @@ class StoryHandler(BaseHandler):
 
     def delete(self, request):
         '''
-        delete by id
-        Sample: DELETE /api/story/?id=1
+        delete storys
+        Current fobidden
+        '''
+        print "get delete"
+        GET = self.flatten_dict(request.GET)
+
+        return rc.FORBIDDEN
+
+    def update(self, request):
+        '''
+        put storys
+        Current fobidden
         '''
         GET = self.flatten_dict(request.GET)
-        if('id' not in GET):
-            return rc.NOT_FOUND
+        POST = self.flatten_dict(request.POST)
+
+        return rc.FORBIDDEN
+
+class StoryHandler(BaseHandler):
+    """ get Story """
+    allowd_methods = ('GET', 'DELETE', 'PUT', )
+
+    model = Story
+    storys = Story.objects
+
+    fields = ('id', 'title', 'author', 'text', 'img_url',
+            'img_horizontal', 'img_veritcal', 'create_on')
+
+    def read(self, request, id):
+        '''
+        read a story from id
+        Sample: GET /api/story/1/
+        '''
+        GET = self.flatten_dict(request.GET)
+        #if(!id):
+            #return rc.BAD_REQUEST
 
         try:
-            id = GET['id']
+            got_story = self.storys.get(id=id)
         except:
-            return rc.BAD_REQUEST
+            return rc.NOT_FOUND
+
+        return got_story
+
+    def create(self, request, id):
+        '''
+        post storys,
+        Current fobidden
+        '''
+        GET = self.flatten_dict(request.GET)
+        POST = self.flatten_dict(request.POST)
+
+        return rc.FORBIDDEN
+
+    def delete(self, request, id):
+        '''
+        delete by id
+        Sample: DELETE /api/story/1/
+        '''
+        GET = self.flatten_dict(request.GET)
 
         try:
             to_del = self.storys.get(id=id)
@@ -153,27 +145,21 @@ class StoryHandler(BaseHandler):
         except:
             return rc.NOT_FOUND
 
-    def update(self, request):
+    def update(self, request, id):
         '''
         update by id
-        Sample: PUT /api/story/?id=1
-                {
-                    title: 'xxx',
-                    author: 'houks',
-                    text: 'aaaaaaaa',
-                    img_url: 'www.a.com/a.png', //optional
-                    img_horizontal: 'l',        //optional
-                    img_veritcal: 't'           //optional
-                }
+        Sample: PUT /api/story/1/
+        {
+            title: 'xxx',
+            author: 'houks',
+            text: 'aaaaaaaa',
+            img_url: 'www.a.com/a.png', //optional
+            img_horizontal: 'l',        //optional
+            img_veritcal: 't'           //optional
+        }
         '''
         GET = self.flatten_dict(request.GET)
         POST = self.flatten_dict(request.POST)
-
-        try:
-            id = GET['id']
-            #update = GET['update']
-        except:
-            rc.BAD_REQUEST
 
         try:
             update_story = self.storys.get(id=id)

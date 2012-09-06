@@ -2,7 +2,7 @@
 
 Meteor is not good. So it comes.
 
-django, spine, less, handlebars, jquery and ??
+django, spine, requirejs, less, handlebars, jquery and ??
 
 (django-piston is dead)
 
