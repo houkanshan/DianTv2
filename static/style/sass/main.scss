@@ -1,0 +1,110 @@
+@import "reset";
+@import "components";
+
+
+
+/*global layout*/
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+}
+body {
+  background: $contentBlackground;
+}
+header {
+  height: $headerHeight;
+}
+.content {
+  // FIXME:try box-sizing to fix the height;
+  height: 100%;
+  /*margin-top: $gridSpacing;*/
+}
+
+
+/*global style*/
+header {
+  background: $headerBackground;
+}
+.content {
+  overflow: hidden;
+}
+
+
+/*header*/
+header {
+  %header-mod {
+    line-height: $headerHeight;
+  }
+  text-align: center;
+  color: $whiteFront;
+  .logo {
+    display: inline; //hack for ie (useful?)
+    display: inline-block;
+    &, h1{ line-height: 1;}
+  }
+  .mod-right {
+    @extend %absolute;
+    @extend %header-mod;
+    right: $gridSpacing;
+    top: 0;
+  }
+  .mod-left {
+    @extend %absolute;
+    @extend %header-mod;
+    left: $gridSpacing;
+    top: 0;
+  }
+}
+
+
+/*content*/
+.content {
+  /*layout*/
+  .big {
+    @extend %box;
+    width: $bigSideWidth;
+    height: 100%;
+    border-width: 0 1px 0 0;  // right
+    margin-left: -1px;  // -1px for border
+
+    float: left;
+  }
+
+  .tiny {
+    @extend %box;
+    height: 15em;
+    border-width: 0 0 1px 0;  // bottom
+  }
+
+  /*style*/
+  .big {
+  }
+}
+
+/*box-mod*/
+%box {
+  padding: $gridSpacing $gridSpacing 0 $gridSpacing;
+  overflow: hidden;
+
+  border-style: solid;
+  border-color: $blackLine;
+
+  .hd {
+    margin-bottom: $gridSpacing;
+  }
+
+  .title {
+    line-height: 1;
+  }
+  .pubtime {
+    font-size: 0.9em;
+  }
+}
+
+
+
+
+
+
+
