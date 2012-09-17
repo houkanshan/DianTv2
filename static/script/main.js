@@ -1,32 +1,38 @@
 // Global require config
 require.config({
-  baseUrl: './',
-  paths: {
-    // here define the module name of jquery, 
-    // it couldn't be any other name since jquery define it in Line 9298
-    jquery: 'lib/jquery',
-    spine: 'lib/spine',
-    app: 'application'
-  },
-  shim: {
-    // spine doesn't support AMD, so define it here to let Global var
-    // to be the exports 
-    spine: {
-      deps: ['jquery'],
-      exports: 'Spine'
+    baseUrl: './',
+    paths: {
+        // here define the module name of jquery, 
+        // it couldn't be any other name since jquery define it in Line 9298
+        'jquery': 'lib/jquery',
+        'spine': 'lib/spine',
+        'spine.route': 'lib/route',
+        'app': 'application',
+        'controller': 'application/controller',
+        'model': 'application/model'
+    },
+    shim: {
+        // spine doesn't support AMD, so define it here to let Global var
+        // to be the exports 
+        spine: {
+            deps: ['jquery'],
+            exports: 'Spine'
+        }
     }
-  }
 });
 
 var debugOn = true;
 
 // run application
 require(['jquery'], function($) {
-  if (debugOn) {
-    require(['lib/live.js']);
-  }
-  require(['application/diantv'], function(DianTv) {
-    DianTv.init();
-  });
+    if (debugOn) {
+        // auto refresh page for debug
+        require(['lib/live.js']);
+    }
+
+    require(['application/diantv'], function(DianTv) {
+        // run !
+        new DianTv();
+    });
 });
 

@@ -5,105 +5,114 @@
 
 /*global layout*/
 html, body {
-  margin: 0;
-  height: 100%;
-  overflow: hidden;
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
 }
 body {
-  background: $contentBlackground;
+    background: $contentBlackground;
 }
 header {
-  height: $headerHeight;
+    height: $headerHeight;
 }
 .content {
-  // FIXME:try box-sizing to fix the height;
-  height: 100%;
-  /*margin-top: $gridSpacing;*/
+    // FIXME:try box-sizing to fix the height;
+    height: 100%;
+    /*margin-top: $gridSpacing;*/
 }
 
 
 /*global style*/
 header {
-  background: $headerBackground;
+    background: $headerBackground;
 }
 .content {
-  overflow: hidden;
+    overflow: hidden;
 }
 
 
 /*header*/
 header {
-  %header-mod {
-    line-height: $headerHeight;
-  }
-  text-align: center;
-  color: $whiteFront;
-  .logo {
-    display: inline; //hack for ie (useful?)
-    display: inline-block;
-    &, h1{ line-height: 1;}
-  }
-  .mod-right {
-    @extend %absolute;
-    @extend %header-mod;
-    right: $gridSpacing;
-    top: 0;
-  }
-  .mod-left {
-    @extend %absolute;
-    @extend %header-mod;
-    left: $gridSpacing;
-    top: 0;
-  }
+    %header-mod {
+        line-height: $headerHeight;
+    }
+    text-align: center;
+    color: $whiteFront;
+    .logo {
+        display: inline; //hack for ie (useful?)
+        display: inline-block;
+        &, h1{ line-height: 1;}
+    }
+    .mod-right {
+        @extend %absolute;
+        @extend %header-mod;
+        right: $gridSpacing;
+        top: 0;
+    }
+    .mod-left {
+        @extend %absolute;
+        @extend %header-mod;
+        left: $gridSpacing;
+        top: 0;
+    }
 }
 
 
 /*content*/
 .content {
-  /*layout*/
-  .big {
-    @extend %box;
-    width: $bigSideWidth;
-    height: 100%;
-    border-width: 0 1px 0 0;  // right
-    margin-left: -1px;  // -1px for border
+    /*layout*/
+    .main {
+        width: $mainSideWidth;
+        border-width: 0px 1px 0px 0px;  // right
+        height: 100%;
 
-    float: left;
-  }
+        float: left;
+    }
+    .aside {
 
-  .tiny {
-    @extend %box;
-    height: 15em;
-    border-width: 0 0 1px 0;  // bottom
-  }
-
-  /*style*/
-  .big {
-  }
+    }
+    /*style*/
+    .main {
+        margin-left: -1px;  // -1px for border
+        border-style: solid;
+        border-color: $blackLine;
+    }
 }
 
 /*box-mod*/
 %box {
-  padding: $gridSpacing $gridSpacing 0 $gridSpacing;
-  overflow: hidden;
+    padding: $gridSpacing $gridSpacing 0 $gridSpacing;
+    overflow: hidden;
 
-  border-style: solid;
-  border-color: $blackLine;
+    border-style: solid;
+    border-color: $blackLine;
 
-  .hd {
-    margin-bottom: $gridSpacing;
-  }
+    .hd {
+        margin-bottom: $gridSpacing;
+    }
 
-  .title {
-    line-height: 1;
-  }
-  .pubtime {
-    font-size: 0.9em;
-  }
+    .title {
+        line-height: 1;
+    }
+    .pubtime {
+        font-size: 0.9em;
+    }
 }
 
+/*layout*/
+.big {
+    @extend %box;
+    border-width: 0;
+}
 
+.tiny {
+    @extend %box;
+    border-width: 0 0 1px 0;  // bottom
+}
 
+/*style*/
+.big {
+}
 
 
 

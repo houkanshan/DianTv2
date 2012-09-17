@@ -345,25 +345,34 @@ header {
 .content {
   /*layout*/
   /*style*/ }
-  .content .big {
+  .content .main {
     width: 45%;
+    border-width: 0px 1px 0px 0px;
     height: 100%;
-    border-width: 0 1px 0 0;
-    margin-left: -1px;
     float: left; }
-  .content .tiny {
-    height: 15em;
-    border-width: 0 0 1px 0; }
+  .content .main {
+    margin-left: -1px;
+    border-style: solid;
+    border-color: #dfdfdf; }
 
 /*box-mod*/
-.content .big, .content .tiny {
+.big, .tiny {
   padding: 10px 10px 0 10px;
   overflow: hidden;
   border-style: solid;
   border-color: #dfdfdf; }
-  .content .big .hd, .content .tiny .hd {
+  .big .hd, .tiny .hd {
     margin-bottom: 10px; }
-  .content .big .title, .content .tiny .title {
+  .big .title, .tiny .title {
     line-height: 1; }
-  .content .big .pubtime, .content .tiny .pubtime {
+  .big .pubtime, .tiny .pubtime {
     font-size: 0.9em; }
+
+/*layout*/
+.big {
+  border-width: 0; }
+
+.tiny {
+  border-width: 0 0 1px 0; }
+
+/*style*/

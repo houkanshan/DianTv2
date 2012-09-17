@@ -9,6 +9,5 @@ define(['spine', 'jquery'], function(Spine, $){
     // private
     });
 
-
     return NewsController;
 });

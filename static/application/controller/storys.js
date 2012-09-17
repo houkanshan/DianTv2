@@ -1,9 +1,20 @@
-define(['spine', 'jquery'], function(Spine, $){
-    // aaaa fuck
+define(['spine', 'jquery', 'model'], function(Spine, $, Storys){
     var StoryController = Spine.Controller.create();
 
     StoryController.extend({
-        // public ? protected ?
+        // public ? inhered ?
+        el: $('.aside'),
+        elements: {},
+        init: function(){
+            this.model = new Storys;
+        },
+        renderAll: function(){
+        },
+        renderOne: function(story){
+            //this.templem
+        },
+        fetch: function(start, count){
+        }
     });
 
     StoryController.include({
