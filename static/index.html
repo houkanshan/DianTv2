@@ -21,74 +21,39 @@
             </div>
         </header>
         <div class="content">
-            <div class="main">
-                <section class="news big">
-                    <div class="hd">
-                        <h2 class="title">DianTimes(DianTv2.0)登场</h2>
-                        <span class="pubtime">2012年10月1日</span>
-                    </div>
-                    <div class="bd">
-                        <p>你好我是新的DianTv, 我有个新名字叫DianTimes</p>
-                        <p>*(&(*&%^$%#())), yo~yo~ oh~ oh~</p>
-                    </div>
-                </section>
-            </div>
-            <div class="aside">
-                <section class="story tiny">
-                    <div class="hd">
-                        <h2 class="title">用户可编辑位置</h2>
-                        <span class="pubtime">2012年10月1日</span>
-                    </div>
-                    <div class="bd">
-                        <p>你好我是新的DianTv, 我有个新名字叫DianTimes</p>
-                        <p>*(&(*&%^$%#())), yo~yo~ oh~ oh~</p>
-                    </div>
-                </section>
-                <section class="story tiny">
-                    <div class="hd">
-                        <h2 class="title">支持图片</h2>
-                        <span class="pubtime">2012年10月1日</span></div>
-                    <div class="bd">
-                        <p>你好我是新的DianTv, 我有个新名字叫DianTimes</p>
-                        <p>*(&(*&%^$%#())), yo~yo~ oh~ oh~</p>
-                    </div>
-                </section>
-                <section class="story tiny">
-                    <div class="hd">
-                        <h2 class="title">不过不想支持上传</h2>
-                        <span class="pubtime">2012年10月1日</span>
-                    </div>
-                    <div class="bd">
-                        <p>你好我是新的DianTv, 我有个新名字叫DianTimes</p>
-                        <p>*(&(*&%^$%#())), yo~yo~ oh~ oh~</p>
-                    </div>
-                </section>
-            </div>
         </div>
     </body>
-    <script id="storyTmpl" type="text/x-handlebars-template">
-        <section class="news big">
-            <div class="hd">
-                <h2 class="title">DianTimes(DianTv2.0)登场</h2>
-                <span class="pubtime">2012年10月1日</span>
-            </div>
-            <div class="bd">
-                <p>你好我是新的DianTv, 我有个新名字叫DianTimes</p>
-                <p>*(&(*&%^$%#())), yo~yo~ oh~ oh~</p>
-            </div>
-        </section>
-    </script>
     <script id="newsTmpl" type="text/x-handlebars-template">
-        <section class="story tiny">
+        <!--<section class="news big">-->
             <div class="hd">
-                <h2 class="title">不过不想支持上传</h2>
-                <span class="pubtime">2012年10月1日</span>
+                <h2 class="title">{{title}}</h2>
+                <span class="pubtime">{{pubdate}}</span>
             </div>
             <div class="bd">
-                <p>你好我是新的DianTv, 我有个新名字叫DianTimes</p>
-                <p>*(&(*&%^$%#())), yo~yo~ oh~ oh~</p>
+                {{#if img}}
+                <img src="{{img.url}}" alt="{{title}}" class="pic"/>
+                {{/if}}
+                {{#each pList}}
+                <p>{{this}}</p>
+                {{/each}}
             </div>
-        </section>
+        <!--</section>-->
+    </script>
+    <script id="storyTmpl" type="text/x-handlebars-template">
+        <!--<section class="story tiny">-->
+            <div class="hd">
+                <h2 class="title">{{title}}</h2>
+                <span class="pubtime">{{pubdate}}</span>
+            </div>
+            <div class="bd">
+                {{#if img}}
+                <img src="{{img.url}}" alt="{{title}}" class="pic"/>
+                {{/if}}
+                {{#each pList}}
+                <p>{{this}}</p>
+                {{/each}}
+            </div>
+        <!--</section>-->
     </script>
 
 </html>

@@ -6,7 +6,7 @@ define(['spine', 'jquery'], function(Spine, $){
     });
 
     NewsController.include({
-    // private
+        // private
     });
 
     return NewsController;

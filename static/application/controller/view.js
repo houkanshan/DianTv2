@@ -4,8 +4,7 @@ define(['spine', 'jquery'], function(Spine, $){
      * the parent module should control the layout of its children's modules,
      * and the style, inner-layout will be controled by children's modules
      * */
-    var ViewFrame = Spine.Controller.create({
-        el: $('html'),
+    var ViewFrame = Spine.Controller.create({ el: $('html'),
         elements: {
             'body': 'bodyEl',
             'header': 'headerEl',
@@ -33,6 +32,7 @@ define(['spine', 'jquery'], function(Spine, $){
         },
         // do init after re-resize section, proxied
         initRender: function(){
+            console.log('view render init');
             this.htmlHeight = this.el.height();
             this.htmlWidth = this.el.width();
 
@@ -41,7 +41,7 @@ define(['spine', 'jquery'], function(Spine, $){
             this.tinyBoxHeight = this.contentHeight / this.option.storysNum;
 
             //send height of tinyBox
-            this.trigger('storys:height:update', {height: this.tinyBoxHeight});
+            this.trigger('storys:style:update', {height: this.tinyBoxHeight});
         },
         // do renderView after re-append section
         renderView: function(){

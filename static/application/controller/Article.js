@@ -4,6 +4,9 @@ define(['spine',
     var ArticleController = Spine.Controller.create();
 
     ArticleController.extend({
+    });
+
+    ArticleController.include({
         el:'',
         elements: {},
         init: function(){
@@ -12,13 +15,7 @@ define(['spine',
         },
         render: function(){
         }
-        
-        
-    });
-
-    ArticleController.include({
-
     });
 
     return ArticleController;
-}
+});

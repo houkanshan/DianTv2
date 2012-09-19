@@ -2,11 +2,15 @@
 require.config({
     baseUrl: './',
     paths: {
+        // Lib
         // here define the module name of jquery, 
         // it couldn't be any other name since jquery define it in Line 9298
         'jquery': 'lib/jquery',
         'spine': 'lib/spine',
         'spine.route': 'lib/route',
+        'handlebars': 'lib/handlebars',
+
+        // Mod
         'app': 'application',
         'controller': 'application/controller',
         'model': 'application/model'
@@ -17,6 +21,10 @@ require.config({
         spine: {
             deps: ['jquery'],
             exports: 'Spine'
+        },
+        handlebars: {
+            deps: [],
+            exports: 'handlebars'
         }
     }
 });
