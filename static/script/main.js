@@ -1,6 +1,6 @@
 // Global require config
 require.config({
-    baseUrl: './',
+    baseUrl: '.',
     paths: {
         // Lib
         // here define the module name of jquery, 

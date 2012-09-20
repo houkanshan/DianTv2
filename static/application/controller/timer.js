@@ -30,6 +30,9 @@ define(['spine', 'jquery'], function(Spine, $) {
                 Spine.trigger('timer:step');
             }),
             timerStep);
+            
+            // do first timer, needn't
+            //this.timerOn && Spine.trigger('timer:step');
         },
         turnOn: function() {
             this.timerOn = true;

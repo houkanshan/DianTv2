@@ -3,7 +3,7 @@ define(['spine',
         'app/config',
         'model/storys', 
         'controller/storyItem'
-        ], function(Spine, $,  config, Storys, StoryItemController){
+        ], function(Spine, $,  config, StorysModel, StoryItemController){
 
     var StorysController = Spine.Controller.create();
 
@@ -13,71 +13,112 @@ define(['spine',
 
     StorysController.include({
         // inhered ?
-        el: $('<div>').addClass('aside'),  // view entity   (section)
+        tag: 'div',
+        className: 'aside',
+        parentEl: $('.content'),
         itemList: [],               // object entity (storyItemController)
         elements: {},
+        option: {
+            // public, XXX
+            storysNum: config.storysNum,
+            style: {}
+        },
         init: function(){
             // init view
             this.render();
 
             // model init
-            this.model = new Storys;
-            this.model.bind('fetched', this.proxy(this.addAll));
-            // TODO: some bad side to fix
-            //this.model.bind('update', this.proxy(this.update));
-            //this.model.bind('create', this.addOne);
+            this.model = new StorysModel;
 
             // event init
-            this.bind('next', this.proxy(this.goNext));
-            this.bind('style:update', this.updateStyle);
+            this.bind('style:update', this.updateItemStyle);
 
+            // do the first fetch, now start
+            this.goNext();
         },
-        updateStyle: function(newOpt){
-            $.extend(this.option, newOpt);
+        // util
+        triggerItems: function(){
+            var args = arguments.length ? [].slice.call(arguments):[];
             for(var i = this.itemList.length; i--;){
-                this.itemList[i].updateStyle(newOpt);
+                this.itemList[i].trigger.apply(this.itemList[i], args);
             }
         },
+        /**
+         * ---------self contorl
+         */
         render: function(){
-            this.parentEl = $('.content');
             this.el.appendTo(this.parentEl);
-            //this.asideEl = $('.aside');
-            //this.asideEl.appendTo(this.el);
         },
         goNext: function(){
-            this.hideAll();
-            this.fetchAll();
+            this.hideItems();
+            this.showItems();
+        },
+        /**
+         * ---------items control
+         */
+        // update the style of each story
+        updateItemStyle: function(newOpt){
+            $.extend(this.option.style, newOpt);
+            this.triggerItems('updateStyle', newOpt);
+        },
+        // show control: remove items and destory elem 
+        hideItems: function(){
+            this.triggerItems('destory');
+            this.itemList = [];
+        },
+        // show control: fetch items and render elem
+        showItems: function(){
+            //the show animate is defined here
+            for(var i = this.option.storysNum; i--;){
+                var itemModel = this.model.getNext();
+                var itemController = new StoryItemController({
+                    model: itemModel,
+                    style: this.option.style
+                });
+                this.el.append(itemController.el);
+
+                this.itemList.push(itemController);
+            }
+        },
+        // model control XXX maybe not need
+        addItems: function(){
+        },
+        deleteItem: function(){
+        },
+        updateItem: function(){
+        },
+        readItem: function(){
         },
         fetchAll: function(){
-            var len = config.storysNum;
-            for(var i = 0; i < len; i++){
-                var storyItem = new StoryItemController;
-                this.itemList.push(storyItem);
-                this.el.append(storyItem.el);
-            }
-            this.model.trigger('fetch', {
-                start: 0, 
-                count: len
-            });
+            //var len = this.option.storysNum;
+            //for(var i = 0; i < len; i++){
+                //var storyItem = new StoryItemController(this.option.style);
+                //this.itemList.push(storyItem);
+                //this.el.append(storyItem.el);
+            //}
+            //this.model.trigger('fetch', {
+                //start: 0, 
+                //count: len
+            //});
         },
         addAll: function(storys){
             // init list dis-ordinary
-            var len = storys.length;
-            for(var i = 0; i < len; i++){
-                this.addOne(i, storys[i]);
-            }
+            //var len = storys.length;
+            //for(var i = 0; i < len; i++){
+                //this.addOne(i, storys[i]);
+            //}
         },
         addOne: function(i, story){
-            var storyItem = this.itemList[i]
-            storyItem.render(story);
-            this.itemList.push(storyItem);
+            //var storyItem = this.itemList[i]
+            //storyItem.render(story);
+            //this.itemList.push(storyItem);
         },
         hideAll: function(){
-            var len = this.itemList.length;
-            for(var i = 0; i < len; i++){
-                this.itemList[i].remove();
-            }
-            this.itemList = [];
+            //var len = this.itemList.length;
+            //for(var i = 0; i < len; i++){
+                //this.itemList[i].remove();
+            //}
+            //this.itemList = [];
         },
         // this will cause object remove
         removeAll: function(){

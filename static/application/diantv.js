@@ -7,10 +7,12 @@ define(['spine',
         'jquery', 
         'app/config', 
         'spine.route',
+        // module load
         'controller/storys', 
         'controller/news',
-        'controller/view'
-        ], function(Spine, $, config, route, Storys, News, ViewFrame) {
+        'controller/screen'
+        ], function(Spine, $, config, route, Storys, News, Screen) {
+
     var DianTv = Spine.Controller.create({
         el: $('body'),
         elements: {},
@@ -24,16 +26,17 @@ define(['spine',
             Spine.Route.setup(); // apply route onload
 
             // controllers init
-            // contorller module load
             this.storys = new Storys;
             this.news = new News;
 
             // page init
-            this.viewFrame = new ViewFrame({storysNum: config.storysNum});
+            this.screen = new Screen({storysNum: config.storysNum});
             //temp no-use
-            this.viewFrame.bind('storys:style:update', this.proxy(function(opt){
-                    this.storys.trigger('style:update', opt);
+            this.screen.bind('storys:style:update', this.proxy(function(style){
+                this.storys.trigger('style:update', style);
             }));
+            // do first screen render
+            this.screen.render();
         },
         // url route
         toTv: function() {
@@ -51,8 +54,11 @@ define(['spine',
         },
         //TODO:view slide
         next: function(){
-            this.storys.trigger('next');
-            this.news.trigger('next');
+            // all the slide animate will make here!!
+            // news 1st, append left
+            this.news.goNext();
+            // storys 2rd, append right
+            this.storys.goNext();
         }
     });
 

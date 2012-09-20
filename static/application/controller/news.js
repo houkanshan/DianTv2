@@ -6,8 +6,17 @@ define(['spine', 'jquery'], function(Spine, $){
     });
 
     NewsController.include({
-        // private
+        el: $('<div>').addClass('main'),
+        elements: {},
+        init: function(){
+
+        },
+        goNext: function(){
+        }
     });
+    //temp
+    //
+
 
     return NewsController;
 });

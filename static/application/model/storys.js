@@ -1,18 +1,19 @@
-define(['spine', 'jquery'], function(Spine, $){
+define(['spine', 
+        'jquery', 
+        'model/storyItem'], function(Spine, $, StoryItemModel){
     var StorysModel = Spine.Class.create();
     StorysModel.include(Spine.Events);
     StorysModel.include({
         init: function(){
-            this.bind('fetch', this.proxy(this.read));
-            this.bind('update', this.proxy(this.update))
         },
+        getNext: function(){
+            return new StoryItemModel({
+                option: {}
+            });
+        },
+        // base method
         read: function(option){
             // TODO
-            this.trigger('fetched', [{
-                title: 'haha', 
-                content:['aa','aaa','aaa'], 
-                img:{}
-            }]);
         },
         create: function(){
             // TODO

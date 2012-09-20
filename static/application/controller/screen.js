@@ -4,7 +4,8 @@ define(['spine', 'jquery'], function(Spine, $){
      * the parent module should control the layout of its children's modules,
      * and the style, inner-layout will be controled by children's modules
      * */
-    var ViewFrame = Spine.Controller.create({ el: $('html'),
+    var Screen = Spine.Controller.create({ 
+        el: $('html'),
         elements: {
             'body': 'bodyEl',
             'header': 'headerEl',
@@ -15,24 +16,29 @@ define(['spine', 'jquery'], function(Spine, $){
         },
         init: function(opt){
             // FIXME: onresizeEnd?
-            //this.initRender();
             this.option = $.extend(this.defaultOption, opt);
-            $(window).resize(this.onresizeWrapper(this.proxy(this.initRender)));
+
+            var resizeCallback = this.onresizeWrapper(this.proxy(this.render));
+            $(window).resize(resizeCallback);
 
             // change view on view num change
-            this.bind('storys:num:update', this.proxy(this.initRender));
+            this.bind('storys:num:update', this.render);
         },
+        // wrapper resize callback with a setTimeout.
         onresizeWrapper: function(callback){
             var resizeTimer = null;
-            if(resizeTimer === null){
-                resizeTimer = setTimeout(function(){
-                    callback && callback();
-                }, 200);
-            }
+            return function(){
+                if(resizeTimer === null){
+                    resizeTimer = setTimeout(function(){
+                        callback && callback();
+                        resizeTimer = null;
+                    }, 200);
+                }
+            };
         },
         // do init after re-resize section, proxied
-        initRender: function(){
-            console.log('view render init');
+        render: function(){
+            console.log('re-render screen');
             this.htmlHeight = this.el.height();
             this.htmlWidth = this.el.width();
 
@@ -40,14 +46,10 @@ define(['spine', 'jquery'], function(Spine, $){
             this.contentHeight = this.htmlHeight - this.headerHeight;
             this.tinyBoxHeight = this.contentHeight / this.option.storysNum;
 
-            //send height of tinyBox
+            //send height(style) of tinyBox
             this.trigger('storys:style:update', {height: this.tinyBoxHeight});
-        },
-        // do renderView after re-append section
-        renderView: function(){
-            this.contentEl.find('.tiny').height(this.tinyBoxHeight);
         }
     });
 
-    return ViewFrame;
+    return Screen;
 });
