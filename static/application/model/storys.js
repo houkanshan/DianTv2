@@ -6,9 +6,13 @@ define(['spine',
     StorysModel.include({
         init: function(){
         },
+        curIndex: 0, 
         getNext: function(){
             return new StoryItemModel({
-                option: {}
+                option: {
+                    start: this.curIndex,
+                    count: 1
+                }
             });
         },
         // base method

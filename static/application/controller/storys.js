@@ -79,54 +79,6 @@ define(['spine',
 
                 this.itemList.push(itemController);
             }
-        },
-        // model control XXX maybe not need
-        addItems: function(){
-        },
-        deleteItem: function(){
-        },
-        updateItem: function(){
-        },
-        readItem: function(){
-        },
-        fetchAll: function(){
-            //var len = this.option.storysNum;
-            //for(var i = 0; i < len; i++){
-                //var storyItem = new StoryItemController(this.option.style);
-                //this.itemList.push(storyItem);
-                //this.el.append(storyItem.el);
-            //}
-            //this.model.trigger('fetch', {
-                //start: 0, 
-                //count: len
-            //});
-        },
-        addAll: function(storys){
-            // init list dis-ordinary
-            //var len = storys.length;
-            //for(var i = 0; i < len; i++){
-                //this.addOne(i, storys[i]);
-            //}
-        },
-        addOne: function(i, story){
-            //var storyItem = this.itemList[i]
-            //storyItem.render(story);
-            //this.itemList.push(storyItem);
-        },
-        hideAll: function(){
-            //var len = this.itemList.length;
-            //for(var i = 0; i < len; i++){
-                //this.itemList[i].remove();
-            //}
-            //this.itemList = [];
-        },
-        // this will cause object remove
-        removeAll: function(){
-            //TODO
-        },
-        // index change to a query will be better
-        removeOne: function(index){
-            //TODO
         }
     });
 

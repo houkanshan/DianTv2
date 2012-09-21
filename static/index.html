@@ -26,11 +26,12 @@
         <!--<section class="news big">-->
             <div class="hd">
                 <h2 class="title">{{title}}</h2>
-                <span class="pubtime">{{pubdate}}</span>
+                <span class="author">{{author}}</span>
+                <span class="pubtime">{{create_on}}</span>
             </div>
             <div class="bd">
                 {{#if img}}
-                <img src="{{img.url}}" alt="{{title}}" class="pic"/>
+                <img class="{{img.floatValue}}" src="{{img.url}}" alt="{{title}}" class="pic"/>
                 {{/if}}
                 {{#each content}}
                 <p>{{this}}</p>
@@ -42,11 +43,12 @@
         <!--<section class="story tiny">-->
             <div class="hd">
                 <h2 class="title">{{title}}</h2>
+                <span class="author">{{author}}</span>
                 <span class="pubtime">{{pubdate}}</span>
             </div>
             <div class="bd">
                 {{#if img}}
-                <img src="{{img.url}}" alt="{{title}}" class="pic"/>
+                <img class="pic {{img.floatValue}}" src="{{img.url}}" alt="{{title}}" class="pic"/>
                 {{/if}}
                 {{#each content}}
                 <p>{{this}}</p>

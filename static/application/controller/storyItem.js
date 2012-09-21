@@ -1,5 +1,4 @@
 // will only bind event of view
-//
 define(['spine', 'jquery', 'handlebars'], function(Spine, $, handlebars) {
     var StoryItemController = Spine.Controller.create();
     StoryItemController.include({
