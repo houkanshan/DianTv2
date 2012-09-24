@@ -24,7 +24,7 @@ require.config({
         },
         handlebars: {
             deps: [],
-            exports: 'handlebars'
+            exports: 'Handlebars'
         }
     }
 });
