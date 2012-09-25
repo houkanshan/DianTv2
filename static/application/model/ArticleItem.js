@@ -8,6 +8,7 @@ define(['spine',
     ArticleItemModel.extend({
         // added in init arguments
         host: 'http://localhost:8081/api',
+        name: 'article',            // abstruct
         collectionUrl: undefined,   // abstruct
         singletonUrl: undefined,    // abstruct
         option: undefined,

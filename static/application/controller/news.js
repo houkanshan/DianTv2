@@ -1,22 +1,26 @@
-define(['spine', 'jquery'], function(Spine, $){
+define(['spine', 
+        'jquery',
+        'app/config',
+        'controller/Articles',
+        'model/news',
+        'controller/newsItem'
+        ], function(Spine, $, config,
+            ArticlesController, NewsModel, NewsItemController){
     var NewsController = Spine.Controller.create();
 
-    NewsController.extend({
-        // public ? protected ?
-    });
+    var NewsController = ArticlesController.create();
+    NewsController.include(ArticlesController);
 
     NewsController.include({
-        el: $('<div>').addClass('main'),
-        elements: {},
-        init: function(){
-
-        },
-        goNext: function(){
+        className: 'main',
+        parentEl: $('.content'),
+        Model: NewsModel,
+        ItemController: NewsItemController,
+        option: {
+            style: {},
+            itemControllerListLength: config.newsNum
         }
     });
-    //temp
-    //
-
 
     return NewsController;
 });

@@ -26,8 +26,8 @@ define(['spine',
             Spine.Route.setup(); // apply route onload
 
             // controllers init
-            this.storys = new Storys;
             this.news = new News;
+            this.storys = new Storys;
 
             // page init
             this.screen = new Screen({storysNum: config.storysNum});
