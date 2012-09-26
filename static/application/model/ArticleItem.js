@@ -28,18 +28,26 @@ define(['spine',
             // TODO;
             this.el;
         },
+        _formatTime: function(timeInModel){
+            var timeRegexp = /([^T]+)T([^.]+).\.*/i;
+            var matchs = timeInModel.match(timeRegexp);
+            return matchs[1] + ' ' + matchs[2];
+        },
         _format: function(res){
             var item = {};
+
             item.id = res.id;
             item.title = res.title;
             item.author = res.author;
             item.create_on = res.create_on;
+            item.create_on = this._formatTime(res.create_on);
             item.content = res.text.split('\n');
             if(res.img_url){
                 item.img = {};
                 item.img.url = res.img_url;
                 item.img.floatValue = res.img_horizontal;
             }
+
             return item;
         },
         // model control
@@ -47,8 +55,10 @@ define(['spine',
             $.get(this.host + this.collectionUrl, this.option)
             .done(this.proxy(function(res){
                 // TODO: need decorate
-                this.item = this._format(res[0]);
-                this.trigger('fetched');
+                if(res.length !== 0){
+                    this.item = this._format(res[0]);
+                }
+                this.trigger('fetched', this.item);
             }))
             .fail(this.proxy(function(res){
                 this.trigger('failed');
@@ -56,8 +66,15 @@ define(['spine',
         },
         _create: function() {
             // TODO
-            var promise = $.post(this.host + this.collectionUrl, this);
-            this.trigger('fetched');
+            var promise = $.post(this.host + this.collectionUrl, this)
+            .done(this.proxy(function(res){
+                // do not use the remote object
+                this.trigger('fetched', this.item);
+            }))
+            .faied(this.proxy(function(res){
+                this.trigger('failed');
+            }));
+
             return promise;
         },
         _update: function(data) {
@@ -66,8 +83,13 @@ define(['spine',
                 url: this.host + this.singletonUrl,
                 method: 'PUT',
                 data: data
-            });
-            this.trigger('fetched');
+            })
+            .done(this.proxy(function(){
+                this.trigger('fetched');
+            }))
+            .failed(this.proxy(function(){
+                this.trigger('failed');
+            }));
             return promise;
         },
         _del: function() {

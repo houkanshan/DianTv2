@@ -53,7 +53,7 @@ define(['spine',
             }
         },
         /**
-         * ---------self contorl
+         * --self contorl
          */
         render: function(){
             this.el.appendTo(this.parentEl);
@@ -63,7 +63,7 @@ define(['spine',
             this.showItems();
         },
         /**
-         * ---------items control
+         * --items control
          */
         // update the style of each story
         updateItemStyle: function(newOpt){

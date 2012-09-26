@@ -20,9 +20,10 @@ define(['spine',
         isLoading: false,
         template: null,
         /**
-         * new ArticleItemController({
-         *     modle: articleModelItem
-           });
+         * @descript new ArticleItemController({
+         *     model: articleModelItem
+         * });
+         * on init, a model will be added by ArticlesController
          */
         init: function(){
             // init view
