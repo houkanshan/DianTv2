@@ -4,8 +4,9 @@
  */
 define(['spine', 
         'jquery', 
-        'handlebars'
-        ], function(Spine, $, Handlebars){
+        'handlebars',
+        'widget/animation'
+        ], function(Spine, $, Handlebars, Animate){
 
     var ArticleItemController = Spine.Controller.create();
     // use 'extend' so that can be touched outside by module, 
@@ -46,6 +47,7 @@ define(['spine',
 
             var articleItem = this.model.item;
             this.el.html(this.template(articleItem));
+            this.el.css(this.style);
             this.trigger('rendered', this.el);
 
         },
@@ -54,7 +56,10 @@ define(['spine',
             this.el.css(newStyle);
         },
         destory: function(){
-            return this.el.remove();
+            Animate(this.el).fadeIn(1000)
+            .onEnd(this.proxy(function(){
+                this.el.remove();
+            }));
         },
         // render method: private
         loading: function(){
