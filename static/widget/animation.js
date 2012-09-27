@@ -34,7 +34,7 @@ define(['jquery'], function($){
      *  }
      */
     function animate(option){
-        var option = option || {};
+        option = option || {};
         var property = option.property || 'all';
         var duration = option.duration || '500';
         var timingFunction = option.timingFunction || 'ease';
