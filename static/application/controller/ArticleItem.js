@@ -16,10 +16,10 @@ define(['spine',
         tag: 'section',
         className: '',
         elements: {},
-        model: null,
-        style: null,
-        isLoading: false,
-        template: null,
+        model: undefined,
+        style: undefined,
+        isLoading: undefined,
+        template: undefined,
         /**
          * @descript new ArticleItemController({
          *     model: articleModelItem
@@ -34,11 +34,15 @@ define(['spine',
             this.model.bind('fetched', this.proxy(this.render));
             this.model.trigger('fetch');
 
+            //self property init
+            this.isLoading = false;
+
             // bind event
             this.bind('updateStyle', this.updateStyle);
             this.bind('destory', this.destory);
         },
         render: function(){
+            this.el.css(this.style);
             if(!this.model || !this.model.item){
                 this.loading();
                 return;
@@ -47,18 +51,22 @@ define(['spine',
 
             var articleItem = this.model.item;
             this.el.html(this.template(articleItem));
-            this.el.css(this.style);
+            Animate(this.el).fadeOut(800);
             this.trigger('rendered', this.el);
-
         },
         updateStyle: function(newStyle){
             $.extend(this.style, newStyle);
             this.el.css(newStyle);
         },
+        /*
+         * return a Promise
+         */
         destory: function(){
-            Animate(this.el).fadeIn(1000)
-            .onEnd(this.proxy(function(){
+            return Animate(this.el).fadeIn(500)
+            .done(this.proxy(function(){
                 this.el.remove();
+                console.log('destoryed');
+                this.trigger('destoryed');
             }));
         },
         // render method: private

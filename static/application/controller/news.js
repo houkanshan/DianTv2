@@ -12,6 +12,7 @@ define(['spine',
     NewsController.include(ArticlesController);
 
     NewsController.include({
+        name: 'news',
         className: 'main',
         parentEl: $('.content'),
         Model: NewsModel,

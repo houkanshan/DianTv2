@@ -42,37 +42,29 @@ define(['jquery'], function($){
         var endCss = option.end.split(':');
 
         var $elem = this;
-        var endQuene = [];
+        var dfd = $.Deferred();
 
+        // turn off the transition
+        $elem.css(getTransitionCss());
         // set start style [if needed]
         $elem.css(startCss[0], startCss[1]);
 
-        // change animate style
-        $elem.css(getTransitionCss(property, duration/1000 + 's', timingFunction));
-        
-        // set end style
-        $elem.css(endCss[0], endCss[1]);
+        setTimeout(function(){
+            // turn on the transition
+            $elem.css(getTransitionCss(property, duration/1000 + 's', timingFunction));
+            // set end style
+            $elem.css(endCss[0], endCss[1]);
+        }, 1);
 
         // reset the transition
-        endQuene.push(function(){
-            $elem.css(getTransitionCss());
-        });
 
         // set end timer
         setTimeout(function(){
-            for(var i = endQuene.length; i--;){
-                endQuene[i].call(this);
-            }
+            $elem.css(getTransitionCss());
+            dfd.resolve();
         }, duration);
 
-        return {
-            onStart: function(callback){
-                callback.call(this);
-            },
-            onEnd: function(callback){
-                endQuene.unshift(callback);
-            }
-        };
+        return dfd.promise();
     }
 
     function fadeIn(duration){
@@ -100,7 +92,7 @@ define(['jquery'], function($){
 
     var Animate = function(elem){
         var elem = $(elem);
-        elem.addClass('animation');
+        //elem.addClass('animation');
         return {
             define: $.proxy(animate, elem),
             fadeIn: $.proxy(fadeIn, elem),

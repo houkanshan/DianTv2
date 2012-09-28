@@ -3,13 +3,16 @@ define(['spine',
         'model/storyItem'], function(Spine, $, StoryItemModel){
 
     var ArticlesModel = Spine.Class.create();
-    ArticlesModel.extend(Spine.Events);
+    //ArticlesModel.extend(Spine.Events);
 
     ArticlesModel.extend({
-        name: '',               //abstruct
+        name: 'article',               //abstruct
         ItemModel: undefined,   //abstruct
         item: undefined,
         init: function(){
+            //self property init
+            //this.extend(Spine.Events);
+            $.extend(this, Spine.Events);
         },
         curIndex: 0, 
         //TODO: deal with boundary 

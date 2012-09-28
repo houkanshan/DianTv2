@@ -12,14 +12,16 @@ define(['spine',
     StorysController.include(ArticlesController);
 
     StorysController.include({
+        name: 'storys',
         className: 'aside',
         parentEl: $('.content'),
         Model: StorysModel,
         ItemController: StoryItemController,
         option: {
             style: {},
-            itemControllerListLength: config.storysNum
-        },
+            itemControllerListLength: config.storysNum,
+            hideStep: config.hideStep
+        }
         /*init: function(){
             debugger;
             console.log('chile run');

@@ -8,10 +8,11 @@ define(['spine',
         'app/config', 
         'spine.route',
         // module load
+        'controller/header',
         'controller/storys', 
         'controller/news',
         'controller/screen'
-        ], function(Spine, $, config, route, Storys, News, Screen) {
+        ], function(Spine, $, config, route, Header, Storys, News, Screen) {
 
     var DianTv = Spine.Controller.create({
         el: $('body'),
@@ -26,6 +27,7 @@ define(['spine',
             Spine.Route.setup(); // apply route onload
 
             // controllers init
+            this.header = new Header;
             this.news = new News;
             this.storys = new Storys;
 
@@ -42,7 +44,7 @@ define(['spine',
         toTv: function() {
             require(['controller/timer'], function(Timer) {
                 this.timer = new Timer({
-                    interval : 3000
+                    interval : config.refreshInterval
                 });
                 Spine.trigger('timer:on');
             });

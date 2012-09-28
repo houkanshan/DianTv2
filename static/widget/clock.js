@@ -5,15 +5,15 @@ define(['jquery'], function($){
 
         var el = option.el || '';
         el = $(el);
-        var refreshTime = option.refreshTime || 1000 * 60;
+        var refreshInterval = option.refreshInterval || 1000 * 60;
 
         var timer = null;
 
         function _renderTime(){
             var timeStr = (function(){
                 var now = new Date();
-                return now.getYear() + '年' + 
-                now.getMonth() + '月' + 
+                return now.getFullYear() + '年' + 
+                (now.getMonth()+1) + '月' + 
                 now.getDate() + '日 ' + 
                 now.getHours() + ':' + now.getMinutes();
             }());
@@ -22,7 +22,8 @@ define(['jquery'], function($){
         }
 
         function _start(){
-            timer = setInterval(_renderTime, refreshTime);
+            _renderTime();
+            timer = setInterval(_renderTime, refreshInterval);
         }
 
         function _stop(){
@@ -40,7 +41,7 @@ define(['jquery'], function($){
      *  example: 
      *  Clock({
      *      el: '#click',
-     *      refreshTime: 1000*60
+     *      refreshInterval: 1000*60
      *  }).start();
      */
     return Clock;

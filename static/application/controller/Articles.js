@@ -4,33 +4,17 @@ define(['spine',
         
     var ArticlesController = Spine.Controller.create();
 
-    // TODO: no-use, will not run
-    ArticlesController.include({
-        init: function(){
-            // init view
-            this.render();
-
-            // model init
-            this.model = new this.Model;
-
-            // event init
-            this.bind('style:update', this.updateItemStyle);
-
-            // do the first fetch, now start
-            this.goNext();
-        }
-    });
-
     ArticlesController.extend({
         tag: 'div',
         className: '',          // abstruct
-        parentEl: null,         // abstruct
-        Model: null,            // abstruct  
-        ItemController: null,   // abstruct
-        itemControllerList: [], 
+        parentEl: undefined,         // abstruct
+        Model: undefined,            // abstruct  
+        ItemController: undefined,   // abstruct
+        itemControllerList: undefined, 
         elements: {},
         option: {               // abstruct
-            style: {}          
+            style: {},
+            hideStep: 200
         },
         init: function(){
             // init view
@@ -39,8 +23,13 @@ define(['spine',
             // model init
             this.model = new this.Model;
 
+            // self object init
+            this.itemControllerList = [];
+
             // event init
             this.bind('style:update', this.updateItemStyle);
+            //this.bind('items:allHide', this.showItems);
+
 
             // do the first fetch, now start
             this.goNext();
@@ -59,8 +48,8 @@ define(['spine',
             this.el.appendTo(this.parentEl);
         },
         goNext: function(){
-            this.hideItems();
-            this.showItems();
+            this.hideItems()
+            .done(this.proxy(this.showItems));
         },
         /**
          * --items control
@@ -71,9 +60,40 @@ define(['spine',
             this.triggerItems('updateStyle', newOpt);
         },
         // show control: remove items and destory elem 
+        _hideItemByTime: function(){
+            var dfd = $.Deferred();
+
+            (function _hideOne(){
+                console.log('hide timer: run');
+                if(this.itemControllerList.length === 0){
+                    dfd.resolve();
+                    return;
+                }
+
+                var curItem  = this.itemControllerList.pop();
+                curItem.destory();
+                console.log('hide timer: done');
+
+                // check if item is the last
+                if(this.itemControllerList.length === 0){
+                    curItem.bind('destoryed', function(){
+                        dfd.resolve();
+                    });
+                    return;
+                }
+
+                setTimeout(this.proxy(_hideOne), this.option.hideStep);
+            }).call(this);
+
+            return dfd.promise();
+        },
         hideItems: function(){
-            this.triggerItems('destory');
-            this.itemControllerList = [];
+            // effect: hide from bottom
+            return this._hideItemByTime();
+
+            // effect: ones hide all
+            //this.triggerItems('destory');
+            //this.itemControllerList = [];
         },
         // show control: fetch items and render elem
         showItems: function(){

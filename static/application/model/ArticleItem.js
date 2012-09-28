@@ -3,7 +3,7 @@ define(['spine',
         ], function(Spine, $) {
     var ArticleItemModel = Spine.Class.create();
     // TODO: maybe not a good idea
-    ArticleItemModel.extend(Spine.Events);
+    //ArticleItemModel.extend(Spine.Events);
 
     ArticleItemModel.extend({
         // added in init arguments
@@ -20,6 +20,9 @@ define(['spine',
                 if(!elem.hasOwnProperty(key));
                 this[key] = elem[key];
             }
+
+            //self property init
+            $.extend(this, Spine.Events);
 
             this.bind('fetch', this._read);
         },
