@@ -52,6 +52,7 @@ define(['spine',
             item.create_on = this._formatTime(res.create_on);
 
             item.content = item.text.split('\n');
+            delete item.text;
 
             if(item.img_url){
                 item.img = {};
@@ -113,7 +114,6 @@ define(['spine',
             return promise;
         },
         _update: function() {
-                     debugger;
             article = this._format2server(this.item);
 
             var promise = $.ajax({
