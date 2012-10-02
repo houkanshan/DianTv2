@@ -72,7 +72,7 @@ define(['spine',
             //item.author = res.author;
             var item = this._deepcp(res);
 
-            item.text = item.content;
+            item.text = item.content.join('\n');
             delete item.content
 
             if(item.img){

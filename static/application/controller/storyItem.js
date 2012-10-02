@@ -23,10 +23,10 @@ StoryItemController.include({
     },
     editable: function(isEditable){
         if(typeof isEditable === 'boolean'){
-            this.editable = isEditable;
+            this.isEditable = isEditable;
         }
 
-        this.editable ? this.waitEdit() : this.nowaitEdit();
+        this.isEditable ? this.waitEdit() : this.nowaitEdit();
     },
     waitEdit: function(){
         if(this.el.hasClass('editable')){return;}

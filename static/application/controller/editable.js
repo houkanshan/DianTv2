@@ -12,7 +12,7 @@ define(['spine',
         //parentEl: undefined,
         //template: Handlebars.compile($('#editTmpl').html()),
         events:{
-            'click .add-btn': 'addImage',
+            'click .set-btn': 'addImage',
             'click .del-btn': 'delImage',
             'click .save-btn': 'save'
         },
@@ -32,8 +32,7 @@ define(['spine',
             }
 
             // handle img
-            var hasImg = !!this.el.find('.pic img').attr('src');
-            this.hasImg(hasImg);
+            this.renderImg();
 
             return this.el;
         },
@@ -48,7 +47,6 @@ define(['spine',
                 img: (function(){
                     var img = $elem.find('.pic img');
                     var url = img.attr('src');
-                    if(!url){return}
                     return {
                         url: url,
                         floatValue: img.data('floatvalue')
@@ -70,22 +68,35 @@ define(['spine',
             // destory
             this.unbind();
         },
-        hasImg: function(hasImg){
-            var imgEl = this.el.find('.pic');
+        renderImg: function(){
+            var picEl = this.el.find('.pic');
+            var hasImg = !!picEl.find('img').attr('src');
             if(hasImg){
-                imgEl.removeClass('no-img');
-                imgEl.addClass('has-img');
+                picEl.removeClass('no-img');
+                picEl.addClass('has-img');
             }
             else {
-                imgEl.removeClass('has-img');
-                imgEl.addClass('no-img');
+                picEl.removeClass('has-img');
+                picEl.addClass('no-img');
             }
         },
         addImage: function(){
-            console.log('click add');
+            console.log('add img');
+            var picEl = this.el.find('.pic');
+            var imgEl = picEl.find('img');
+            var urlEl = this.el.find('.url-field');
+            var url = urlEl.text().trim();
+            url = encodeURI(url);
+
+            imgEl.attr('src', url);
+            this.renderImg();
         },
         delImage: function(){
-            console.log('click del');
+            var picEl = this.el.find('.pic');
+            var imgEl = picEl.find('img');
+
+            imgEl.attr('src', '');
+            this.renderImg();
         }
     });
 

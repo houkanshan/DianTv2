@@ -19,8 +19,8 @@
                 <!--天气是晴, 20摄氏度-->
             </div>
         </header>
-        <div class="content">
-        </div>
+        <article class="article">
+        </article>
     </body>
     <script id="newsTmpl" type="text/x-handlebars-template">
         <!--<section class="news big">-->
@@ -44,22 +44,23 @@
     <script id="storyTmpl" type="text/x-handlebars-template">
         <!--<section class="story tiny">-->
             <div class="hd">
-                <input type="button" class="save-btn" value="保存" />
+                <input type="button" class="button save-btn" value="保存" />
                 <h2 class="title editable">{{title}}</h2>
                 <span class="author editable">{{author}}</span>
                 <span class="pubtime">{{create_on}}</span>
             </div>
             <div class="bd">
-                <div class="pic">
-                    {{#if img}}
+                {{#if img.url}}
+                <div class="pic has-img">
                     <img class="{{img.floatValue}}" data-floatvalue="{{img.floatValue}}" src="{{img.url}}" alt="{{title}}" class="pic"/>
-                    {{else}}
-                    <img class="" src="" alt="{{title}}" class="pic hidden"/>
-                    {{/if}}
+                {{else}}
+                <div class="pic no-img">
+                    <img class="" src="" alt="{{title}} no-img" class="pic hidden"/>
+                {{/if}}
 
-                    <a href="javascript:;" class="set-btn">添加图片</a>
-                    <a href="javascript:;" class="del-btn">x</a>
-                    <input type="input" value="{{img.url}}" name="pic" class="url-field"/>
+                    <input type="button" class="button set-btn" value="添加图片" />
+                    <a href="javascript:;" class="del-btn">×</a>
+                    <div class="url-field editable">{{img.url}}</div>
                 </div>
                 <div class="content editable">
                     {{#each content}}
@@ -72,7 +73,7 @@
     <script id="editTmpl" type="text/x-handlebars-template">
         <!--<section class="story tiny">-->
             <div class="hd">
-                <input type="button" value="保存" class="save-btn"/>
+                <input type="button" value="保存" class="button save-btn"/>
                 <h2 class="title" >
                     <input type="input" value="{{title}}" name="title" />
                 </h2>

@@ -28,7 +28,7 @@ define(['spine',
             
             // route init
             this.route('/tv', this.proxy(this.toTv));
-            this.route('', this.proxy(this.toPc));
+            this.route(/\/?/, this.proxy(this.toPc));
             Spine.Route.setup(); // apply route onload
 
             // page init

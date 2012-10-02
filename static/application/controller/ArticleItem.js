@@ -69,9 +69,9 @@ define(['spine',
         destory: function(){
             return Animate(this.el).fadeIn(500)
             .done(this.proxy(function(){
-                this.release();
                 console.log('destoryed');
                 this.trigger('destoryed');
+                this.release();
             }));
         },
         // render method: private

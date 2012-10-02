@@ -8,22 +8,30 @@ html, body {
     margin: 0;
     height: 100%;
     overflow: hidden;
+    font-size: 16px;
 }
 body {
     background: $contentBlackground;
 }
 input {
-    border-width: 1px;
+    border: 1px solid $gray;
+    vertical-align: center;
 }
+p {
+    font-size: 100%;
+}
+.button {
+    border-radius: 5px;
+    background: none;
+}
+
 header {
     height: $headerHeight;
 }
-.content {
+article {
     // FIXME:try box-sizing to fix the height;
     height: 100%;
-    /*margin-top: $gridSpacing;*/
-    word-break: break-all;  
-    word-wrap: break-word;  
+
 }
 
 
@@ -31,8 +39,9 @@ header {
 header {
     background: $headerBackground;
 }
-.content {
+article {
     overflow: hidden;
+
 }
 
 
@@ -64,7 +73,7 @@ header {
 
 
 /*content*/
-.content {
+article {
     /*layout*/
     .main {
         width: $mainSideWidth;
@@ -100,22 +109,34 @@ header {
     }
 
     .title {
-        line-height: 1;
+        line-height: 1.2em;
         overflow:hidden;
+
+        font-size: 25px;
     }
     .pubtime {
         font-size: 0.9em;
     }
 
+    .content {
+        overflow:hidden;
+        font-size: 20px;
+        /*margin-top: $gridSpacing;*/
+        word-break: break-all;  
+        word-wrap: break-word;  
+    }
+
     &.editable {
         &:hover {
-            background: $darkGray;
+            background: $gray;
             opacity: 0.5;
             //TODO add a bg here
         }
-    }
+    } 
     .save-btn {
         float: right;
+        height: 30px;
+        line-height: 30px;
     }
     .save-btn, 
     .set-btn, 
@@ -125,40 +146,59 @@ header {
     }
 }
 
+/* box-mod-edit */
 %box.editing {
     %edit-border {
         margin-top: -1px;
-        border: 1px solid $darkGray;
+        border: 1px solid $gray;
     }
-    .editable {
+    .title {
         @extend %edit-border;
     }
     .content {
         border: none;
         margin-top: 0;
     }
+    .author {
+        min-width: 4em;
+        display: inline-block;
+    }
     .bd {
         @extend %edit-border;
     }
     .save-btn {
         display: block;
+        margin-left: $gridSpacing;
+    }
+
+    .pic {
+        background: $orange;
     }
 }
 
-/* box-mod:layout */
+/* big-mod */
 .big {
     @extend %box;
     border-width: 0;
 }
 
+/* tiny-mod */
 .tiny {
     @extend %box;
     border-width: 0 0 1px 0;  // bottom
     .pic {
         float: left;
-        max-width: 40%;
-        height: 100%;
-        padding-right: $gridSpacing;
+        &.no-img {
+            img {
+                @extend .hidden;
+            }
+        }
+        &.has-img {
+            max-width: 40%;
+            min-width: 20%;
+            padding-right: $gridSpacing;
+        }
+
         img {
             max-width:100%;
             max-height: 100%;
@@ -169,41 +209,89 @@ header {
         max-height: 100px;
     }
 }
+.tiny.editing {
+    .pic {
+        &.no-img {
+            float: none;
+            width: 100%;
+            padding: 5px 0;
 
-/* box-mod:style*/
-.big {
+            %pic-line-item {
+                margin: 0 5px;
+                height: 1.8em;
+                line-height: 1.8em;
+                font-size: 14px;
+            }
+
+            .del-btn {
+                @extend .hidden;
+            }
+            .url-field {
+                @extend %pic-line-item;
+                display: block;
+            }
+            .set-btn {
+                @extend %pic-line-item;
+                display: block;
+            }
+        }
+
+        &.has-img {
+            margin-bottom: -2000px;
+            padding-bottom: 2000px;
+
+            .set-btn {
+                @extend .hidden;
+            }
+            .url-field {
+                @extend .hidden;
+            }
+            img {
+                display: block;
+            }
+            .del-btn {
+                display: inline;
+            }
+        }
+    }
 }
-
 
 /* pic-mod */
 .pic {
-    &.no-img {
-        img {
-            @extend %hidden;
-        }
-        .del-btn {
-            @extend %hidden;
-        }
-        .url-field {
-            display: block;
-        }
-        .set-btn {
-            display: inline;
-        }
+    position: relative;
+    overflow: hidden;
+
+    .set-btn {
+        float: right;
     }
-    &.has-img {
-        .set-btn {
-            @extend %hidden;
-        }
-        .url-field {
-            @extend %hidden;
-        }
-        img {
-            display: block;
-        }
-        .del-btn {
-            display: inline;
-        }
+    .url-field {
+        overflow:hidden;
+        background: $white;
     }
 }
 
+/* save-btn-mod */
+.save-btn {
+    background: $blue;
+    color: $white;
+    border: none;
+}
+
+/* del-btn-mod */
+.del-btn {
+    /*layout*/
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    height: 16px;
+    line-height: 16px;
+    width: 16px;
+
+    text-align: center;
+
+    /*style*/
+    color: $darkGray;
+    text-decoration: none;
+    background: $gray;
+    border-radius: 8px;
+}

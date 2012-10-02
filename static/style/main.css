@@ -300,7 +300,7 @@ cite {
 .big .del-btn,
 .tiny .del-btn,
 .big .url-field,
-.tiny .url-field {
+.tiny .url-field, .tiny .pic.no-img img, .tiny.editing .pic.no-img .del-btn, .tiny.editing .pic.has-img .set-btn, .tiny.editing .pic.has-img .url-field {
   display: none; }
 
 header .mod-right, header .mod-left {
@@ -313,28 +313,34 @@ header .mod-right, header .mod-left {
 html, body {
   margin: 0;
   height: 100%;
-  overflow: hidden; }
+  overflow: hidden;
+  font-size: 16px; }
 
 body {
   background: #fffff7; }
 
 input {
-  border-width: 1px; }
+  border: 1px solid #dfdfdf;
+  vertical-align: center; }
+
+p {
+  font-size: 100%; }
+
+.button {
+  border-radius: 5px;
+  background: none; }
 
 header {
   height: 54px; }
 
-.content {
-  height: 100%;
-  /*margin-top: $gridSpacing;*/
-  word-break: break-all;
-  word-wrap: break-word; }
+article {
+  height: 100%; }
 
 /*global style*/
 header {
   background: black; }
 
-.content {
+article {
   overflow: hidden; }
 
 /*header*/
@@ -356,15 +362,15 @@ header {
     top: 0; }
 
 /*content*/
-.content {
+article {
   /*layout*/
   /*style*/ }
-  .content .main {
+  article .main {
     width: 45%;
     border-width: 0px 1px 0px 0px;
     height: 100%;
     float: left; }
-  .content .main {
+  article .main {
     margin-left: -1px;
     border-style: solid;
     border-color: #dfdfdf; }
@@ -380,36 +386,54 @@ header {
   .big .bd, .tiny .bd {
     overflow: hidden; }
   .big .title, .tiny .title {
-    line-height: 1;
-    overflow: hidden; }
+    line-height: 1.2em;
+    overflow: hidden;
+    font-size: 25px; }
   .big .pubtime, .tiny .pubtime {
     font-size: 0.9em; }
+  .big .content, .tiny .content {
+    overflow: hidden;
+    font-size: 20px;
+    /*margin-top: $gridSpacing;*/
+    word-break: break-all;
+    word-wrap: break-word; }
   .editable.big:hover, .editable.tiny:hover {
     background: #dfdfdf;
     opacity: 0.5; }
   .big .save-btn, .tiny .save-btn {
-    float: right; }
+    float: right;
+    height: 30px;
+    line-height: 30px; }
 
-.editing.big .editable, .editing.tiny .editing.big .editable, .editing.big .editing.tiny .editable, .editing.big .editing.tiny .editable, .editing.tiny .editing.big .editable, .editing.tiny .editable, .editing.big .bd, .editing.tiny .editing.big .bd, .editing.big .editing.tiny .bd, .editing.big .editing.tiny .bd, .editing.tiny .editing.big .bd, .editing.tiny .bd {
+/* box-mod-edit */
+.editing.big .title, .editing.tiny .editing.big .title, .editing.big .editing.tiny .title, .editing.big .editing.tiny .title, .editing.tiny .editing.big .title, .editing.tiny .title, .editing.big .bd, .editing.tiny .editing.big .bd, .editing.big .editing.tiny .bd, .editing.big .editing.tiny .bd, .editing.tiny .editing.big .bd, .editing.tiny .bd {
   margin-top: -1px;
   border: 1px solid #dfdfdf; }
 .editing.big .content, .editing.tiny .content {
   border: none;
   margin-top: 0; }
+.editing.big .author, .editing.tiny .author {
+  min-width: 4em;
+  display: inline-block; }
 .editing.big .save-btn, .editing.tiny .save-btn {
-  display: block; }
+  display: block;
+  margin-left: 10px; }
+.editing.big .pic, .editing.tiny .pic {
+  background: #fff6ed; }
 
-/* box-mod:layout */
+/* big-mod */
 .big {
   border-width: 0; }
 
+/* tiny-mod */
 .tiny {
   border-width: 0 0 1px 0; }
   .tiny .pic {
-    float: left;
-    max-width: 40%;
-    height: 100%;
-    padding-right: 10px; }
+    float: left; }
+    .tiny .pic.has-img {
+      max-width: 40%;
+      min-width: 20%;
+      padding-right: 10px; }
     .tiny .pic img {
       max-width: 100%;
       max-height: 100%; }
@@ -417,13 +441,55 @@ header {
     min-height: 3em;
     max-height: 100px; }
 
-/* box-mod:style*/
+.tiny.editing .pic.no-img {
+  float: none;
+  width: 100%;
+  padding: 5px 0; }
+  .tiny.editing .pic.no-img .url-field, .tiny.editing .pic.no-img .set-btn {
+    margin: 0 5px;
+    height: 1.8em;
+    line-height: 1.8em;
+    font-size: 14px; }
+  .tiny.editing .pic.no-img .url-field {
+    display: block; }
+  .tiny.editing .pic.no-img .set-btn {
+    display: block; }
+.tiny.editing .pic.has-img {
+  margin-bottom: -2000px;
+  padding-bottom: 2000px; }
+  .tiny.editing .pic.has-img img {
+    display: block; }
+  .tiny.editing .pic.has-img .del-btn {
+    display: inline; }
+
 /* pic-mod */
-.pic.no-img .url-field {
-  display: block; }
-.pic.no-img .set-btn {
-  display: inline; }
-.pic.has-img img {
-  display: block; }
-.pic.has-img .del-btn {
-  display: inline; }
+.pic {
+  position: relative;
+  overflow: hidden; }
+  .pic .set-btn {
+    float: right; }
+  .pic .url-field {
+    overflow: hidden;
+    background: #fffff7; }
+
+/* save-btn-mod */
+.save-btn {
+  background: #2e6e9e;
+  color: #fffff7;
+  border: none; }
+
+/* del-btn-mod */
+.del-btn {
+  /*layout*/
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  height: 16px;
+  line-height: 16px;
+  width: 16px;
+  text-align: center;
+  /*style*/
+  color: #8f8f8f;
+  text-decoration: none;
+  background: #dfdfdf;
+  border-radius: 8px; }
