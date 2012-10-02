@@ -21,11 +21,15 @@ define(['spine',
             style: {},
             itemControllerListLength: config.storysNum,
             hideStep: config.hideStep
+        },
+        init: function(){
+            this.__parent__.init.call(this);
+
+            this.bind('editable', function(isEditable){
+                this.triggerItems('editable', isEditable);
+            });
+
         }
-        /*init: function(){
-            debugger;
-            console.log('chile run');
-        }*/
     });
     return StorysController;
 });

@@ -12,6 +12,9 @@ html, body {
 body {
     background: $contentBlackground;
 }
+input {
+    border-width: 1px;
+}
 header {
     height: $headerHeight;
 }
@@ -90,16 +93,57 @@ header {
     .hd {
         margin-bottom: $gridSpacing;
     }
+    .bd {
+        overflow:hidden;
+    }
 
     .title {
         line-height: 1;
+        overflow:hidden;
     }
     .pubtime {
         font-size: 0.9em;
     }
+
+    &.editable {
+        &:hover {
+            background: $darkGray;
+            opacity: 0.5;
+            //TODO add a bg here
+        }
+    }
+    .save-btn {
+        float: right;
+    }
+    .save-btn, 
+    .set-btn, 
+    .del-btn,
+    .url-field {
+        @extend .hidden;
+    }
 }
 
-/*layout*/
+%box.editing {
+    %edit-border {
+        margin-top: -1px;
+        border: 1px solid $darkGray;
+    }
+    .editable {
+        @extend %edit-border;
+    }
+    .content {
+        border: none;
+        margin-top: 0;
+    }
+    .bd {
+        @extend %edit-border;
+    }
+    .save-btn {
+        display: block;
+    }
+}
+
+/* box-mod:layout */
 .big {
     @extend %box;
     border-width: 0;
@@ -108,9 +152,55 @@ header {
 .tiny {
     @extend %box;
     border-width: 0 0 1px 0;  // bottom
+    .pic {
+        float: left;
+        max-width: 40%;
+        height: 100%;
+        padding-right: $gridSpacing;
+        img {
+            max-width:100%;
+            max-height: 100%;
+        }
+    }
+    .content {
+        max-height: 100px;
+    }
 }
 
-/*style*/
+/* box-mod:style*/
 .big {
+}
+
+
+/* pic-mod */
+.pic {
+    &.no-img {
+        img {
+            @extend %hidden;
+        }
+        .del-btn {
+            @extend %hidden;
+        }
+        .url-field {
+            display: block;
+        }
+        .set-btn {
+            display: inline;
+        }
+    }
+    &.has-img {
+        .set-btn {
+            @extend %hidden;
+        }
+        .url-field {
+            @extend %hidden;
+        }
+        img {
+            display: block;
+        }
+        .del-btn {
+            display: inline;
+        }
+    }
 }
 

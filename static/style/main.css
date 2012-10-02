@@ -294,6 +294,15 @@ cite {
 
 /*model*/
 /*@import "code.less";*/
+.hidden, .big .save-btn, .tiny .save-btn,
+.big .set-btn,
+.tiny .set-btn,
+.big .del-btn,
+.tiny .del-btn,
+.big .url-field,
+.tiny .url-field {
+  display: none; }
+
 header .mod-right, header .mod-left {
   position: absolute;
   top: 0; }
@@ -308,6 +317,9 @@ html, body {
 
 body {
   background: #fffff7; }
+
+input {
+  border-width: 1px; }
 
 header {
   height: 54px; }
@@ -363,16 +375,52 @@ header {
   border-color: #dfdfdf; }
   .big .hd, .tiny .hd {
     margin-bottom: 10px; }
+  .big .bd, .tiny .bd {
+    overflow: hidden; }
   .big .title, .tiny .title {
-    line-height: 1; }
+    line-height: 1;
+    overflow: hidden; }
   .big .pubtime, .tiny .pubtime {
     font-size: 0.9em; }
+  .editable.big:hover, .editable.tiny:hover {
+    background: #dfdfdf;
+    opacity: 0.5; }
+  .big .save-btn, .tiny .save-btn {
+    float: right; }
 
-/*layout*/
+.editing.big .editable, .editing.tiny .editing.big .editable, .editing.big .editing.tiny .editable, .editing.big .editing.tiny .editable, .editing.tiny .editing.big .editable, .editing.tiny .editable, .editing.big .bd, .editing.tiny .editing.big .bd, .editing.big .editing.tiny .bd, .editing.big .editing.tiny .bd, .editing.tiny .editing.big .bd, .editing.tiny .bd {
+  margin-top: -1px;
+  border: 1px solid #dfdfdf; }
+.editing.big .content, .editing.tiny .content {
+  border: none;
+  margin-top: 0; }
+.editing.big .save-btn, .editing.tiny .save-btn {
+  display: block; }
+
+/* box-mod:layout */
 .big {
   border-width: 0; }
 
 .tiny {
   border-width: 0 0 1px 0; }
+  .tiny .pic {
+    float: left;
+    max-width: 40%;
+    height: 100%;
+    padding-right: 10px; }
+    .tiny .pic img {
+      max-width: 100%;
+      max-height: 100%; }
+  .tiny .content {
+    max-height: 100px; }
 
-/*style*/
+/* box-mod:style*/
+/* pic-mod */
+.pic.no-img .url-field {
+  display: block; }
+.pic.no-img .set-btn {
+  display: inline; }
+.pic.has-img img {
+  display: block; }
+.pic.has-img .del-btn {
+  display: inline; }

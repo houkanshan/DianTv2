@@ -2,6 +2,9 @@
  * animation
  *==================
  */
+.hidden {
+  display: none; }
+
 /*length*/
 /*color*/
 .animation {

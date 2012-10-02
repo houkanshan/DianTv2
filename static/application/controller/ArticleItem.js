@@ -20,6 +20,7 @@ define(['spine',
         style: undefined,
         isLoading: undefined,
         template: undefined,
+        __parent__: ArticleItemController,  // not a good idea
         /**
          * @descript new ArticleItemController({
          *     model: articleModelItem
@@ -49,6 +50,10 @@ define(['spine',
             }
             this.loaded();
 
+            // add id (needn't)
+            this.el.data('id', this.model.item.id);
+
+            // render view
             var articleItem = this.model.item;
             this.el.html(this.template(articleItem));
             Animate(this.el).fadeOut(800);
@@ -64,7 +69,7 @@ define(['spine',
         destory: function(){
             return Animate(this.el).fadeIn(500)
             .done(this.proxy(function(){
-                this.el.remove();
+                this.release();
                 console.log('destoryed');
                 this.trigger('destoryed');
             }));

@@ -6,7 +6,7 @@
 define(['spine', 
         'jquery', 
         'app/config', 
-        'spine.route',
+        'route',
         // module load
         'controller/header',
         'controller/storys', 
@@ -20,16 +20,16 @@ define(['spine',
         init: function() {
             // models init
             // current no Global Models
-            
-            // route init
-            this.route('/tv', this.proxy(this.toTv));
-            this.route('', this.proxy(this.toPc));
-            Spine.Route.setup(); // apply route onload
 
             // controllers init
             this.header = new Header;
             this.news = new News;
             this.storys = new Storys;
+            
+            // route init
+            this.route('/tv', this.proxy(this.toTv));
+            this.route('', this.proxy(this.toPc));
+            Spine.Route.setup(); // apply route onload
 
             // page init
             this.screen = new Screen({storysNum: config.storysNum});
@@ -49,10 +49,14 @@ define(['spine',
                 Spine.trigger('timer:on');
             });
             Spine.bind('timer:step', this.proxy(this.next));
+
+            this.storys.trigger('editable', false);
         },
         toPc: function() {
             Spine.trigger('timer:off');
             Spine.unbind('timer:step');
+
+            this.storys.trigger('editable', true);
         },
         //TODO:view slide
         next: function(){

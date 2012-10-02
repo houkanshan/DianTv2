@@ -12,6 +12,7 @@ define(['spine',
         collectionUrl: undefined,   // abstruct
         singletonUrl: undefined,    // abstruct
         option: undefined,
+        __parent__: ArticleItemModel,
 
         init: function() {
             //extend elements
@@ -27,6 +28,9 @@ define(['spine',
             this.bind('fetch', this._read);
         },
         // util
+        _deepcp: function(obj){
+            return JSON.parse(JSON.stringify(obj));
+        },
         _serialize: function(){
             // TODO;
             this.el;
@@ -36,19 +40,44 @@ define(['spine',
             var matchs = timeInModel.match(timeRegexp);
             return matchs[1] + ' ' + matchs[2];
         },
-        _format: function(res){
-            var item = {};
+        _format2client: function(res){
+            //var item = {};
 
-            item.id = res.id;
-            item.title = res.title;
-            item.author = res.author;
-            item.create_on = res.create_on;
+            //item.id = res.id;
+            //item.title = res.title;
+            //item.author = res.author;
+
+            //item.create_on = res.create_on;
+            var item = this._deepcp(res);
             item.create_on = this._formatTime(res.create_on);
-            item.content = res.text.split('\n');
-            if(res.img_url){
+
+            item.content = item.text.split('\n');
+
+            if(item.img_url){
                 item.img = {};
-                item.img.url = res.img_url;
-                item.img.floatValue = res.img_horizontal;
+                item.img.url = item.img_url;
+                item.img.floatValue = item.img_horizontal;
+                delete item.img_url;
+                delete item.img_horizontal;
+            }
+
+            return item;
+        },
+        _format2server: function(res){
+            //var item = {};
+
+            //item.id = res.id;
+            //item.title = res.title;
+            //item.author = res.author;
+            var item = this._deepcp(res);
+
+            item.text = item.content;
+            delete item.content
+
+            if(item.img){
+                item.img_url = item.img.url;
+                item.img_horizontal = item.img.floatValue;
+                delete item.img;
             }
 
             return item;
@@ -59,7 +88,7 @@ define(['spine',
             .done(this.proxy(function(res){
                 // TODO: need decorate
                 if(res.length !== 0){
-                    this.item = this._format(res[0]);
+                    this.item = this._format2client(res[0]);
                 }
                 this.trigger('fetched', this.item);
             }))
@@ -67,37 +96,49 @@ define(['spine',
                 this.trigger('failed');
             }));
         },
-        _create: function() {
-            // TODO
-            var promise = $.post(this.host + this.collectionUrl, this)
+        _create: function(article) {
+            var promise = $.ajax({
+                url: this.host + this.collectionUrl,
+                type: 'POST',
+                data: article
+            })
             .done(this.proxy(function(res){
                 // do not use the remote object
-                this.trigger('fetched', this.item);
+                //this.trigger('fetched', this.item);
             }))
-            .faied(this.proxy(function(res){
+            .fail(this.proxy(function(res){
                 this.trigger('failed');
             }));
 
             return promise;
         },
-        _update: function(data) {
-            // TODO
+        _update: function() {
+                     debugger;
+            article = this._format2server(this.item);
+
             var promise = $.ajax({
-                url: this.host + this.singletonUrl,
-                method: 'PUT',
-                data: data
+                url: this.host + this.singletonUrl + '/' + article.id,
+                type: 'PUT',
+                data: article
             })
             .done(this.proxy(function(){
-                this.trigger('fetched');
+                //this.trigger('fetched');
             }))
-            .failed(this.proxy(function(){
+            .fail(this.proxy(function(){
                 this.trigger('failed');
             }));
             return promise;
         },
         _del: function() {
             // TODO
+        },
+
+        // outer method
+        save: function(article){
+            $.extend(this.item, article);
+            this._update();
         }
+
     });
 
     return ArticleItemModel;

@@ -11,6 +11,7 @@ define(['spine',
         Model: undefined,            // abstruct  
         ItemController: undefined,   // abstruct
         itemControllerList: undefined, 
+        __parent__: ArticlesController,  // no a good idea
         elements: {},
         option: {               // abstruct
             style: {},
@@ -25,6 +26,7 @@ define(['spine',
 
             // self object init
             this.itemControllerList = [];
+            this.isEditable = false;
 
             // event init
             this.bind('style:update', this.updateItemStyle);

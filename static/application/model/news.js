@@ -9,7 +9,9 @@ define(['spine',
 
     NewsModel.include({
         name: 'news',
-        ItemModel: NewsItemModel
+        ItemModel: NewsItemModel,
+        init: function(){
+        }
     });
 
     return NewsModel;

@@ -1,3 +1,4 @@
+var debugOn = false;
 // Global require config
 require.config({
     baseUrl: '.',
@@ -7,7 +8,7 @@ require.config({
         // it couldn't be any other name since jquery define it in Line 9298
         'jquery': 'lib/jquery',
         'spine': 'lib/spine',
-        'spine.route': 'lib/route',
+        'route': 'lib/route',
         'handlebars': 'lib/handlebars',
 
         // Mod
@@ -25,11 +26,14 @@ require.config({
         handlebars: {
             deps: [],
             exports: 'Handlebars'
+        },
+        route: {
+            deps: ['spine'],
+            exports: 'route'
         }
     }
 });
 
-var debugOn = true;
 
 // run application
 require(['jquery'], function($) {

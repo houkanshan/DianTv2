@@ -40,6 +40,7 @@ define(['jquery'], function($){
         var timingFunction = option.timingFunction || 'ease';
         var startCss = option.start.split(':');
         var endCss = option.end.split(':');
+        var cleanCss = option.clean && option.clean.split(':');
 
         var $elem = this;
         var dfd = $.Deferred();
@@ -60,7 +61,10 @@ define(['jquery'], function($){
 
         // set end timer
         setTimeout(function(){
+            // do css clean
             $elem.css(getTransitionCss());
+            cleanCss && $elem.css(cleanCss[0], cleanCss[1]);
+
             dfd.resolve();
         }, duration);
 
@@ -73,7 +77,8 @@ define(['jquery'], function($){
             duration: duration,
             timingFunction: 'ease',
             start: 'opacity: 1',
-            end: 'opacity: 0'
+            end: 'opacity: 0',
+            clean: 'opacity:'
         });
     }
 
@@ -86,7 +91,8 @@ define(['jquery'], function($){
             duration: duration,
             timingFunction: 'ease',
             start: 'opacity: 0',
-            end: 'opacity: 1'
+            end: 'opacity: 1',
+            clean: 'opacity:'
         });
     }
 

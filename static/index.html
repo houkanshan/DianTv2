@@ -31,28 +31,67 @@
             </div>
             <div class="bd">
                 {{#if img}}
-                <img class="{{img.floatValue}}" src="{{img.url}}" alt="{{title}}" class="pic"/>
+                <img class="pic {{img.floatValue}}" src="{{img.url}}" alt="{{title}}" class="pic"/>
                 {{/if}}
-                {{#each content}}
-                <p>{{this}}</p>
-                {{/each}}
+                <div class="content">
+                    {{#each content}}
+                    <p>{{this}}</p>
+                    {{/each}}
+                </div>
             </div>
         <!--</section>-->
     </script>
     <script id="storyTmpl" type="text/x-handlebars-template">
         <!--<section class="story tiny">-->
             <div class="hd">
-                <h2 class="title">{{title}}</h2>
-                <span class="author">{{author}}</span>
+                <input type="button" class="save-btn" value="保存" />
+                <h2 class="title editable">{{title}}</h2>
+                <span class="author editable">{{author}}</span>
                 <span class="pubtime">{{create_on}}</span>
             </div>
             <div class="bd">
-                {{#if img}}
-                <img class="pic {{img.floatValue}}" src="{{img.url}}" alt="{{title}}" class="pic"/>
-                {{/if}}
-                {{#each content}}
-                <p>{{this}}</p>
-                {{/each}}
+                <div class="pic">
+                    {{#if img}}
+                    <img class="{{img.floatValue}}" data-floatvalue="{{img.floatValue}}" src="{{img.url}}" alt="{{title}}" class="pic"/>
+                    {{else}}
+                    <img class="" src="" alt="{{title}}" class="pic hidden"/>
+                    {{/if}}
+
+                    <a href="javascript:;" class="set-btn">添加图片</a>
+                    <a href="javascript:;" class="del-btn">x</a>
+                    <input type="input" value="{{img.url}}" name="pic" class="url-field"/>
+                </div>
+                <div class="content editable">
+                    {{#each content}}
+                    <p>{{this}}</p>
+                    {{/each}}
+                </div>
+            </div>
+        <!--</section>-->
+    </script>
+    <script id="editTmpl" type="text/x-handlebars-template">
+        <!--<section class="story tiny">-->
+            <div class="hd">
+                <input type="button" value="保存" class="save-btn"/>
+                <h2 class="title" >
+                    <input type="input" value="{{title}}" name="title" />
+                </h2>
+                <span class="author">
+                    <input type="input" value="{{author}}" name="author"/>
+                </span>
+                <span class="pubtime">{{create_on}}</span>
+                <!--<input type="input" value="{{create_on}}" name="create_on" class="pubtime" />-->
+            </div>
+            <div class="bd">
+                <div class="pic">
+                    <img src="{{img}}" alt="{{title}}" class="img-field" />
+                    <a href="javascript:;" class="set-btn">添加图片</a>
+                    <a href="javascript:;" class="del-btn">x</a>
+                    <input type="input" value="{{img}}" name="pic" class="url-field"/>
+                </div>
+                <div class="content">
+                    <textarea name="content" rows="10"  cols="30">{{content}}</textarea>
+                </div>
             </div>
         <!--</section>-->
     </script>
