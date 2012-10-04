@@ -15,7 +15,8 @@ define(['jquery'], function($){
                 return now.getFullYear() + '年' + 
                 (now.getMonth()+1) + '月' + 
                 now.getDate() + '日 ' + 
-                now.getHours() + ':' + now.getMinutes();
+                now.getHours() + ':' + 
+                (now.getMinutes()/100).toFixed(2).toString().substr(2);
             }());
 
             el.text(timeStr);

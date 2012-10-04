@@ -1,5 +1,5 @@
 define(['spine', 
-        'jquery',
+        'jquery'
        ], function(Spine, $){
 
 var Action = Spine.Controller.create();
@@ -28,7 +28,7 @@ Action.include({
         Spine.trigger('all:prev');
     },
     add: function(){
-        //this.home();
+        this.home();
         Spine.trigger('storys:add');
     },
     hide: function(){

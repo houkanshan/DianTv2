@@ -40,6 +40,7 @@ ArticlesModel.extend({
     get: function(){
         if(this.curIndex < 0){
             this.curIndex = 0;
+            Spine.trigger('msg:one', '到顶了哦, 没有了哦');
         }
         var option = {
             start: this.curIndex,

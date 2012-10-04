@@ -12,6 +12,11 @@ class StorysHandler(BaseHandler):
     """ get Storys """
     allowd_methods = ('GET', 'POST', )
 
+    # headers sent in all responses
+    cors_headers = [
+        ('Access-Control-Allow-Origin',     '*'),
+    ]
+
     model = Story
     storys = Story.objects
 
@@ -286,6 +291,12 @@ class NewsHandler(BaseHandler):
 class NewHandler(BaseHandler):
     """ get New"""
     allowd_methods = ('GET', 'DELETE', 'PUT', )
+
+    # headers sent in all responses
+    cors_headers = [
+        ('Access-Control-Allow-Origin',     '*'),
+    ]
+
 
     model = News
     news = News.objects

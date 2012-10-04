@@ -1,5 +1,6 @@
 @import "reset";
 @import "components";
+@import "fontface";
 
 
 /*global layout*/
@@ -67,6 +68,36 @@ header {
         @extend %header-mod;
         left: $gridSpacing;
         top: 0;
+    }
+    .message {
+        font-size: 14px;
+    }
+}
+
+/* menu-mod */
+.menu {
+}
+.menu .iconbtn {
+    font-family: 'general_foundicons';
+    font-size: 30px;
+    display: inline-block;
+    height: $headerHeight;
+    width: $headerHeight * 1.3;
+    line-height: $headerHeight;
+    margin-left: $gridSpacing;
+
+
+    text-decoration: none;
+    color: $white;
+
+    &:link{
+    }
+    &:visited{
+    }
+    &:hover{
+        color: $black;
+        background: $white;
+        border-radius: 5px 5px 0 0;
     }
 }
 

@@ -1,14 +1,16 @@
 define(['spine', 
         'jquery', 
         'widget/clock',
-        'controller/action'
-        ], function(Spine, $, Clock, Action){
+        'widget/weather',
+        'controller/action',
+        ], function(Spine, $, Clock, Weather, Action){
     var Header = Spine.Controller.create();
 
     Header.include({
         el: $('header'),
         elements: {
-            '.date': 'dateEl'
+            '.date': 'dateEl',
+            '.weather': 'weatherEl'
         },
         init: function(){
             //var el = $('<div>').addClass('date mod-left');
@@ -16,6 +18,10 @@ define(['spine',
                 el: this.dateEl
                 //, refreshInterval: 1000
             }).start();
+
+           //Weather.startGet(this.proxy(function(msg){
+                //this.weatherEl.text(msg);
+           //}));
         },
         render: function(){
         }

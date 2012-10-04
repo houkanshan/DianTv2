@@ -133,6 +133,7 @@ define(['spine',
             }
         },
         showPrevItems: function(){
+            // XXX: this module care of Index or NOT ??!!
             this.model.curIndex -= 2 * this.option.itemControllerListLength;
             this.showItems('getNext');
         },

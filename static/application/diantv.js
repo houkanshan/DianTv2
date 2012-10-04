@@ -12,9 +12,11 @@ define(['spine',
         'controller/storys', 
         'controller/news',
         'controller/screen',
-        'controller/action'
+        'controller/action',
+        'controller/message',
+        'widget/connectivity'
         ], function(Spine, $, config, route, 
-            Header, Storys, News, Screen, Action) {
+            Header, Storys, News, Screen, Action, Message, Connectivity) {
 
     var DianTv = Spine.Controller.create({
         el: $('body'),
@@ -29,6 +31,21 @@ define(['spine',
             this.storys = new Storys;
 
             this.action = new Action;
+
+            this.message = new Message;
+            this.message.add('head', 'www.dian.org.cn/tv');
+            var helps = config.initMsg;
+            for(var id in helps){
+                this.message.add(id, helps[id]);
+            }
+
+            Connectivity.startPing(function(){
+                Spine.trigger('msg:error:start', '连接断了...')
+            }, 
+            function(){
+                Spine.trigger('msg:error:end');
+            });
+
             
             // route init
             this.route('/tv', this.proxy(this.toTv));

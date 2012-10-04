@@ -2,12 +2,13 @@ from django.conf.urls import patterns, include, url
 from piston.resource import Resource
 from storys.handlers import StorysHandler, StoryHandler, NewsHandler, NewHandler
 from piston.utils import rc
+from cors_resource import CORSResource
 
-storys_resource = Resource(handler=StorysHandler)
-story_resource = Resource(handler=StoryHandler)
+storys_resource = CORSResource(handler=StorysHandler)
+story_resource = CORSResource(handler=StoryHandler)
 
-news_resource = Resource(handler=NewsHandler)
-new_resource = Resource(handler=NewHandler)
+news_resource = CORSResource(handler=NewsHandler)
+new_resource = CORSResource(handler=NewHandler)
 
 
 urlpatterns = patterns('',

@@ -309,6 +309,13 @@ header .mod-right, header .mod-left {
 
 /*length*/
 /*color*/
+@font-face {
+  font-family: 'general_foundicons';
+  src: url("fonts/general_foundicons.eot");
+  src: url("fonts/general_foundicons.eot?#iefix") format("embedded-opentype"), url("fonts/general_foundicons.woff") format("woff"), url("fonts/general_foundicons.ttf") format("truetype"), url("fonts/general_foundicons.svg#generalFoundicons") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
 /*global layout*/
 html, body {
   margin: 0;
@@ -360,6 +367,24 @@ header {
   header .mod-left {
     left: 10px;
     top: 0; }
+  header .message {
+    font-size: 14px; }
+
+/* menu-mod */
+.menu .iconbtn {
+  font-family: 'general_foundicons';
+  font-size: 30px;
+  display: inline-block;
+  height: 54px;
+  width: 70.2px;
+  line-height: 54px;
+  margin-left: 10px;
+  text-decoration: none;
+  color: #fffff7; }
+  .menu .iconbtn:hover {
+    color: black;
+    background: #fffff7;
+    border-radius: 5px 5px 0 0; }
 
 /*content*/
 article {
