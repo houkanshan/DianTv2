@@ -20,13 +20,17 @@ StoryItemController.include({
 
         this.bind('editable', this.editable);
         this.bind('rendered', this.editable);
+
+        this.editable();
     },
     editable: function(isEditable){
         if(typeof isEditable === 'boolean'){
             this.isEditable = isEditable;
         }
 
-        this.isEditable ? this.waitEdit() : this.nowaitEdit();
+        if(this.model.item && this.model.item.id >= 0){
+            this.isEditable ? this.waitEdit() : this.nowaitEdit();
+        }
     },
     waitEdit: function(){
         if(this.el.hasClass('editable')){return;}
@@ -52,7 +56,7 @@ StoryItemController.include({
         //e.stopPropagation();
     },
     save: function(article){
-        this.waitEdit();
+        this.editable();
         
         // TODO save to model
         this.model.save(article);

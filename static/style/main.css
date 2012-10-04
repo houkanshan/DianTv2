@@ -438,7 +438,7 @@ article {
       max-height: 100%; }
   .tiny .content {
     min-height: 3em;
-    max-height: 100px; }
+    height: 100%; }
 
 .tiny.editing .pic {
   position: relative; }
@@ -456,8 +456,9 @@ article {
     .tiny.editing .pic.no-img .set-btn {
       display: block; }
   .tiny.editing .pic.has-img {
-    margin-bottom: -2000px;
-    padding-bottom: 2000px; }
+    /*margin-bottom: -300px;*/
+    /*padding-bottom: 300px;*/
+    height: 100%; }
     .tiny.editing .pic.has-img img {
       display: block; }
     .tiny.editing .pic.has-img .del-btn {

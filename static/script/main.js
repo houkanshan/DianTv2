@@ -14,7 +14,8 @@ require.config({
         // Mod
         'app': 'application',
         'controller': 'application/controller',
-        'model': 'application/model'
+        'model': 'application/model',
+        'widget': 'application/widget'
     },
     shim: {
         // spine doesn't support AMD, so define it here to let Global var

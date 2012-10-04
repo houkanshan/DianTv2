@@ -17,6 +17,7 @@ define(['spine',
             style: {},
             hideStep: 200
         },
+        itemOption: {},
         init: function(){
             // init view
             this.render();
@@ -26,11 +27,13 @@ define(['spine',
 
             // self object init
             this.itemControllerList = [];
-            this.isEditable = false;
 
             // event init
             this.bind('style:update', this.updateItemStyle);
-            //this.bind('items:allHide', this.showItems);
+            // api bind
+            Spine.bind('all:next', this.proxy(this.goNext));
+            Spine.bind('all:prev', this.proxy(this.goPrev));
+            Spine.bind('all:goto', this.proxy(this.go));
 
 
             // do the first fetch, now start
@@ -49,9 +52,20 @@ define(['spine',
         render: function(){
             this.el.appendTo(this.parentEl);
         },
+        go: function(index){
+            this.hideItems()
+            .done(this.proxy(function(){
+                this.model.curIndex = 0;
+                this.showItems('getNext');
+            }))
+        },
+        goPrev: function(){
+            this.hideItems()
+            .done(this.proxy(this.showPrevItems));
+        },
         goNext: function(){
             this.hideItems()
-            .done(this.proxy(this.showItems));
+            .done(this.proxy(this.showNextItems));
         },
         /**
          * --items control
@@ -98,18 +112,31 @@ define(['spine',
             //this.itemControllerList = [];
         },
         // show control: fetch items and render elem
-        showItems: function(){
+        showItems: function(iterName){
             //the show animate is defined here
             for(var i = this.option.itemControllerListLength; i--;){
-                var itemModel = this.model.getNext();
-                var itemController = new this.ItemController({
+                // get item's model
+                var itemModel = this.model[iterName]();
+
+                // get item's controller
+                var option = {
                     model: itemModel,
-                    style: this.option.style
-                });
+                    style: this.option.style,
+                };
+                $.extend(option, this.itemOption);
+                var itemController = new this.ItemController(option);
+
                 this.el.append(itemController.el);
 
                 this.itemControllerList.push(itemController);
             }
+        },
+        showPrevItems: function(){
+            this.model.curIndex -= 2 * this.option.itemControllerListLength;
+            this.showItems('getNext');
+        },
+        showNextItems: function(){
+            this.showItems('getNext');
         }
     });
 

@@ -11,8 +11,10 @@ define(['spine',
         'controller/header',
         'controller/storys', 
         'controller/news',
-        'controller/screen'
-        ], function(Spine, $, config, route, Header, Storys, News, Screen) {
+        'controller/screen',
+        'controller/action'
+        ], function(Spine, $, config, route, 
+            Header, Storys, News, Screen, Action) {
 
     var DianTv = Spine.Controller.create({
         el: $('body'),
@@ -25,6 +27,8 @@ define(['spine',
             this.header = new Header;
             this.news = new News;
             this.storys = new Storys;
+
+            this.action = new Action;
             
             // route init
             this.route('/tv', this.proxy(this.toTv));

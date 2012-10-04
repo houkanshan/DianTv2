@@ -1,7 +1,8 @@
 define(['spine', 
         'jquery', 
-        'widget/clock'
-        ], function(Spine, $, Clock){
+        'widget/clock',
+        'controller/action'
+        ], function(Spine, $, Clock, Action){
     var Header = Spine.Controller.create();
 
     Header.include({

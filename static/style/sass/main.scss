@@ -207,7 +207,7 @@ article {
     }
     .content {
         min-height: 3em;
-        max-height: 100px;
+        height: 100%;
     }
 }
 .tiny.editing {
@@ -239,8 +239,9 @@ article {
         }
 
         &.has-img {
-            margin-bottom: -2000px;
-            padding-bottom: 2000px;
+            /*margin-bottom: -300px;*/
+            /*padding-bottom: 300px;*/
+            height: 100%;
 
             .set-btn {
                 @extend .hidden;

@@ -26,9 +26,15 @@ define(['spine',
             this.__parent__.init.call(this);
 
             this.bind('editable', function(isEditable){
+                this.itemOption.isEditable = isEditable;
                 this.triggerItems('editable', isEditable);
             });
 
+            Spine.bind('storys:add', this.proxy(this.add));
+
+        },
+        add: function(){
+            //this.
         }
     });
     return StorysController;
