@@ -156,8 +156,6 @@ article {
         @extend %edit-border;
     }
     .content {
-        border: none;
-        margin-top: 0;
     }
     .author {
         min-width: 4em;
@@ -194,9 +192,12 @@ article {
             }
         }
         &.has-img {
-            max-width: 40%;
-            min-width: 20%;
+            /*max-width: 40%;*/
+            max-height: 100%;
             padding-right: $gridSpacing;
+        }
+        &.b-style{
+            float: right;
         }
 
         img {
@@ -211,6 +212,7 @@ article {
 }
 .tiny.editing {
     .pic {
+        position: relative;
         &.no-img {
             float: none;
             width: 100%;
@@ -258,7 +260,6 @@ article {
 
 /* pic-mod */
 .pic {
-    position: relative;
     overflow: hidden;
 
     .set-btn {

@@ -43,9 +43,9 @@ define(['spine',
             this.bind('destory', this.destory);
         },
         render: function(){
-            this.el.css(this.style);
             if(!this.model || !this.model.item){
                 this.loading();
+                this.updateStyle();
                 return;
             }
             this.loaded();
@@ -56,12 +56,34 @@ define(['spine',
             // render view
             var articleItem = this.model.item;
             this.el.html(this.template(articleItem));
+            this.updateStyle();
             Animate(this.el).fadeOut(800);
             this.trigger('rendered', this.el);
         },
         updateStyle: function(newStyle){
+            console.log('update style');
+            // outer style set
             $.extend(this.style, newStyle);
-            this.el.css(newStyle);
+            if(this.style.css){
+                this.el.css(this.style.css);
+            }
+            if(this.style.styleFunc){
+                for(var funcName in this.style.styleFunc){
+                    this.el[funcName](this.style.styleFunc[funcName]);
+                }
+            }
+
+            // self style set
+            var totalHeight = this.el.height();
+            var hdHeight = this.el.find('.hd').outerHeight();
+            var bdHeight = totalHeight - hdHeight - 20;
+            this.el.find('.bd').outerHeight(bdHeight);
+            // hack for firefox
+            this.el.find('.pic img').css('max-height', bdHeight);
+
+            if(this.model.item && (this.model.item.id & 1)){
+                this.el.find('.pic').addClass('b-style');
+            }
         },
         /*
          * return a Promise

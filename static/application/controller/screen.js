@@ -47,7 +47,11 @@ define(['spine', 'jquery'], function(Spine, $){
             this.tinyBoxHeight = this.contentHeight / this.option.storysNum;
 
             //send height(style) of tinyBox
-            this.trigger('storys:style:update', {height: this.tinyBoxHeight});
+            this.trigger('storys:style:update', {
+                styleFunc: {
+                    outerHeight: this.tinyBoxHeight
+                }
+            });
         }
     });
 

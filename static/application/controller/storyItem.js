@@ -57,7 +57,7 @@ StoryItemController.include({
         // TODO save to model
         this.model.save(article);
 
-        this.render();
+        //this.render();
 
         delete this.editController;
     }
