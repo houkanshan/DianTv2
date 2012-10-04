@@ -32,10 +32,10 @@ class StorysHandler(BaseHandler):
             count = int(GET['count'])
             print 'find count', count
 
-        if count != 0:
-            return self.storys.order_by('create_on')[ start : (start + count)]
-        else:
-            return self.storys.order_by('create_on')[start:]
+        #if count != 0:
+            return self.storys.order_by('-create_on')[ (start): (start+count)]
+        #else:
+            #return self.storys.order_by('create_on')[start:]
 
     def create(self, request):
         '''
@@ -217,10 +217,10 @@ class NewsHandler(BaseHandler):
             count = int(GET['count'])
             print 'find count', count
 
-        if count != 0:
-            return self.news.order_by('create_on')[ start : (start + count)]
-        else:
-            return self.news.order_by('create_on')[start:]
+        #if count != 0:
+            return self.news.order_by('-create_on')[ (start): (start+count)]
+        #else:
+            #return self.news.order_by('create_on')[start:]
 
     def create(self, request):
         '''

@@ -17,6 +17,15 @@ ArticlesModel.extend({
     },
     curIndex: 0, 
     //TODO: deal with boundary 
+    add: function(){
+        var option  = {
+            empty: true
+        };
+        var itemModel = new this.ItemModel({
+            option: option
+        });
+        return itemModel;
+    },
     getNext: function(){
         var modelItem = this.get();
         this.curIndex++;

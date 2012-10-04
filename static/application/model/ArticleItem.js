@@ -5,6 +5,14 @@ define(['spine',
 var ArticleItemModel = Spine.Class.create();
 // TODO: maybe not a good idea
 //ArticleItemModel.extend(Spine.Events);
+//
+
+var emptyItem = {
+    title: ' ',
+    author: ' ',
+    content: [' '],
+    img: ' '
+};
 
 ArticleItemModel.extend({
     // added in init arguments
@@ -12,7 +20,7 @@ ArticleItemModel.extend({
     name: 'article',            // abstruct
     collectionUrl: undefined,   // abstruct
     singletonUrl: undefined,    // abstruct
-    option: undefined,
+    option: {},
     __parent__: ArticleItemModel,
 
     init: function() {
@@ -61,13 +69,12 @@ ArticleItemModel.extend({
         item.content = item.text.split('\n');
         delete item.text;
 
-        if(item.img_url){
-            item.img = {};
-            item.img.url = item.img_url;
-            item.img.floatValue = item.img_horizontal;
-            delete item.img_url;
-            delete item.img_horizontal;
-        }
+        item.img = {};
+        item.img.url = (item.img_url && item.img_url.length) ? 
+            item.img_url : null;
+        item.img.floatValue = item.img_horizontal;
+        delete item.img_url;
+        delete item.img_horizontal;
 
         return item;
     },
@@ -93,9 +100,8 @@ ArticleItemModel.extend({
     // model control
     _getEmpty: function(){
         console.log('get a empty item');
-        this.trigger('fetched', {
-            id: -1
-        });
+        this.item = this._deepcp(emptyItem);
+        this.trigger('fetched');
     },
     _read: function() {
         $.get(this.host + this.collectionUrl, this.option)
@@ -110,15 +116,16 @@ ArticleItemModel.extend({
             this.trigger('failed');
         }));
     },
-    _create: function(article) {
+    _create: function() {
+        var article = this._format2server(this.item);
+
         var promise = $.ajax({
             url: this.host + this.collectionUrl,
             type: 'POST',
             data: article
         })
         .done(this.proxy(function(res){
-            // do not use the remote object
-            //this.trigger('fetched', this.item);
+            this.trigger('fetched', this.item);
         }))
         .fail(this.proxy(function(res){
             this.trigger('failed');
@@ -127,7 +134,7 @@ ArticleItemModel.extend({
         return promise;
     },
     _update: function() {
-        article = this._format2server(this.item);
+        var article = this._format2server(this.item);
 
         var promise = $.ajax({
             url: this.host + this.singletonUrl + '/' + article.id,
@@ -140,6 +147,7 @@ ArticleItemModel.extend({
         .fail(this.proxy(function(){
             this.trigger('failed');
         }));
+
         return promise;
     },
     _del: function() {
@@ -149,7 +157,12 @@ ArticleItemModel.extend({
     // outer method
     save: function(article){
         $.extend(this.item, article);
-        this._update();
+        if(this.item.id >= 0){
+            this._update();
+        }
+        else {
+            this._create();
+        }
     }
 
 });

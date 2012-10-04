@@ -121,10 +121,11 @@ define(['spine',
                 // get item's controller
                 var option = {
                     model: itemModel,
-                    style: this.option.style,
+                    style: this.option.style
                 };
                 $.extend(option, this.itemOption);
                 var itemController = new this.ItemController(option);
+                itemController.fetch();
 
                 this.el.append(itemController.el);
 

@@ -28,7 +28,7 @@ StoryItemController.include({
             this.isEditable = isEditable;
         }
 
-        if(this.model.item && this.model.item.id >= 0){
+        if(this.model.item){
             this.isEditable ? this.waitEdit() : this.nowaitEdit();
         }
     },

@@ -34,7 +34,22 @@ define(['spine',
 
         },
         add: function(){
-            //this.
+            //TODO: finish add
+            var itemModel = this.model.add();
+
+            var option = {
+                model: itemModel,
+                style: this.option.style
+            };
+            $.extend(option, this.itemOption);
+            
+            var itemController = new this.ItemController(option);
+            itemController.fetch();
+
+            this.el.prepend(itemController.el);
+
+            this.itemControllerList.unshift(itemController);
+
         }
     });
     return StorysController;

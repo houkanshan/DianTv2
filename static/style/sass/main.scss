@@ -2,7 +2,6 @@
 @import "components";
 
 
-
 /*global layout*/
 html, body {
     margin: 0;
@@ -101,6 +100,7 @@ article {
     border-style: solid;
     border-color: $blackLine;
 
+
     .hd {
         margin-bottom: $gridSpacing;
     }
@@ -133,6 +133,9 @@ article {
             //TODO add a bg here
         }
     } 
+    .editable {
+        min-height: 1em;
+    }
     .save-btn {
         float: right;
         height: 30px;
@@ -143,6 +146,19 @@ article {
     .del-btn,
     .url-field {
         @extend .hidden;
+    }
+
+
+    %one-line {
+        white-space: nowrap; 
+        overflow: hidden;
+    }
+    .author {
+        @extend %one-line;
+        display: inline-block;
+    }
+    .url-field {
+        @extend %one-line;
     }
 }
 
@@ -160,6 +176,8 @@ article {
     .author {
         min-width: 4em;
         display: inline-block;
+        margin-top: -1px;
+        border-bottom: 1px solid $gray;
     }
     .bd {
         @extend %edit-border;

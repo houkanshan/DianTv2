@@ -400,10 +400,17 @@ article {
   .editable.big:hover, .editable.tiny:hover {
     background: #dfdfdf;
     opacity: 0.5; }
+  .big .editable, .tiny .editable {
+    min-height: 1em; }
   .big .save-btn, .tiny .save-btn {
     float: right;
     height: 30px;
     line-height: 30px; }
+  .big .author, .tiny .big .author, .big .tiny .author, .big .tiny .author, .tiny .big .author, .tiny .author, .big .url-field, .tiny .big .url-field, .big .tiny .url-field, .big .tiny .url-field, .tiny .big .url-field, .tiny .url-field {
+    white-space: nowrap;
+    overflow: hidden; }
+  .big .author, .tiny .author {
+    display: inline-block; }
 
 /* box-mod-edit */
 .editing.big .title, .editing.tiny .editing.big .title, .editing.big .editing.tiny .title, .editing.big .editing.tiny .title, .editing.tiny .editing.big .title, .editing.tiny .title, .editing.big .bd, .editing.tiny .editing.big .bd, .editing.big .editing.tiny .bd, .editing.big .editing.tiny .bd, .editing.tiny .editing.big .bd, .editing.tiny .bd {
@@ -411,7 +418,9 @@ article {
   border: 1px solid #dfdfdf; }
 .editing.big .author, .editing.tiny .author {
   min-width: 4em;
-  display: inline-block; }
+  display: inline-block;
+  margin-top: -1px;
+  border-bottom: 1px solid #dfdfdf; }
 .editing.big .save-btn, .editing.tiny .save-btn {
   display: block;
   margin-left: 10px; }

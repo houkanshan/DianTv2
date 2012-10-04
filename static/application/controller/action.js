@@ -28,7 +28,7 @@ Action.include({
         Spine.trigger('all:prev');
     },
     add: function(){
-        this.home();
+        //this.home();
         Spine.trigger('storys:add');
     },
     hide: function(){

@@ -33,7 +33,6 @@ define(['spine',
 
             // model fetch
             this.model.bind('fetched', this.proxy(this.render));
-            this.model.trigger('fetch');
 
             //self property init
             this.isLoading = false;
@@ -41,6 +40,9 @@ define(['spine',
             // bind event
             this.bind('updateStyle', this.updateStyle);
             this.bind('destory', this.destory);
+        },
+        fetch: function(){
+            this.model.trigger('fetch');
         },
         render: function(){
             if(!this.model || !this.model.item){
@@ -56,7 +58,10 @@ define(['spine',
             // render view
             var articleItem = this.model.item;
             this.el.html(this.template(articleItem));
-            this.updateStyle();
+            // setTimeout:do render first
+            setTimeout(this.proxy(function(){
+                this.updateStyle();
+            }), 1);
             Animate(this.el).fadeOut(800);
             this.trigger('rendered', this.el);
         },
