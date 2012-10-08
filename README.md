@@ -2,10 +2,9 @@
 
 Meteor is not good. So it comes.
 
-django, spine, requirejs, less, handlebars, jquery and ??
-
-(django-piston is dead)
+Django, Spine, Requirejs, Sass, Handlebars, jQuery 
 
 "django 1.5 make everything confused"
 
 
+Front-End files in /static

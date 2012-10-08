@@ -1,4 +1,5 @@
 from django.db import models
+import datetime
 
 
 # position of img in content
@@ -18,7 +19,9 @@ HORIZONTAL = (
 class Article(models.Model):
     title = models.CharField(max_length=255)
     author = models.CharField(max_length=30)
-    create_on = models.DateTimeField(auto_now_add=True)
+    #create_on = models.DateTimeField(default=(datetime.datetime.now()+datetime.timedelta(hours=8)))
+    #create_on = models.DateTimeField(default=(datetime.datetime.now()))
+    create_on = models.DateTimeField(auto_now=True);
     text = models.TextField()
     img_url = models.URLField(max_length=255, blank=True)
     img_veritcal = models.CharField(max_length=1, choices=VERITCAL, blank=True)

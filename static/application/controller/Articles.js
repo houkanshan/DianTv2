@@ -131,6 +131,9 @@ define(['spine',
 
                 this.itemControllerList.push(itemController);
             }
+
+            console.log(this.name+':allrendered');
+            Spine.trigger(this.name+':allrendered');
         },
         showPrevItems: function(){
             // XXX: this module care of Index or NOT ??!!

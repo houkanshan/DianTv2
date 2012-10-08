@@ -1,7 +1,8 @@
 define([], function(){
     var config = {
         //view
-        apiHost: 'https://192.168.7.103:8081',
+        apiHost: 'http://127.0.0.1:8081/api',
+        pingHost: 'http://127.0.0.1:8081/api/storys/?start=0&count=0',
         storysNum: 3,
         newsNum: 1,
         hideStep: 200,

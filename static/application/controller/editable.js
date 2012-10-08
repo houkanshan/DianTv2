@@ -43,7 +43,9 @@ define(['spine',
                 title: $elem.find('.title').text().trim(),
                 author: $elem.find('.author').text().trim(),
                 // content need format
-                content: $elem.find('.content').text().trim().split('\n'),
+                content: $elem.find('.content').contents().map(function(index, elem){
+                    return elem.textContent;
+                }).get(),
                 img: (function(){
                     var img = $elem.find('.pic img');
                     var url = img.attr('src');
@@ -56,15 +58,33 @@ define(['spine',
 
             return article;
         },
+        checkHtmlComp: function(){
+            var editableEl =  this.el.find('.editable').not('.url-field');
+            var isComp = true;
+            editableEl.each(function(index, elem){
+                if($(elem).text().trim().length === 0){
+                    isComp = false;
+                }
+            });
+            return isComp;
+
+        },
         edit: function(){
             this.isEditing = true;
             this.render();
             this.trigger('editing');
         },
         save: function(){
+            // check if could save
+            if(!this.checkHtmlComp()){
+                Spine.trigger('msg:one', '内容不完整, 保存失败...');
+                return;
+            }
+
             this.isEditing = false;
             this.render();
-            this.trigger('save', this.collectFromHtml(this.el));
+            var collectedHtml = this.collectFromHtml(this.el);
+            this.trigger('save', collectedHtml);
             // destory
             this.unbind();
         },

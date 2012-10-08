@@ -7,8 +7,8 @@ define(['spine',
         ], function(Spine, $,  config, 
             ArticlesController, StorysModel, StoryItemController){
 
-    //var StorysController = Spine.Controller.create();
-    var StorysController = ArticlesController.create();
+    var StorysController = Spine.Controller.create();
+    //var StorysController = ArticlesController.create();
     StorysController.include(ArticlesController);
 
     StorysController.include({
@@ -44,8 +44,12 @@ define(['spine',
             $.extend(option, this.itemOption);
             
             var itemController = new this.ItemController(option);
+
+
+            itemController.one('loaded', itemController.edit);
             itemController.fetch();
 
+            // use prepend to add at top of the list
             this.el.prepend(itemController.el);
 
             this.itemControllerList.unshift(itemController);

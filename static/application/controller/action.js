@@ -28,8 +28,10 @@ Action.include({
         Spine.trigger('all:prev');
     },
     add: function(){
+        Spine.one('storys:allrendered', this.proxy(function(){
+            Spine.trigger('storys:add');
+        }));
         this.home();
-        Spine.trigger('storys:add');
     },
     hide: function(){
         this.el.hide();

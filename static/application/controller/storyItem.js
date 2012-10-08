@@ -23,6 +23,7 @@ StoryItemController.include({
 
         this.editable();
     },
+    // set of reset item's editable
     editable: function(isEditable){
         if(typeof isEditable === 'boolean'){
             this.isEditable = isEditable;
@@ -32,17 +33,20 @@ StoryItemController.include({
             this.isEditable ? this.waitEdit() : this.nowaitEdit();
         }
     },
+    // let item wait click for editing
     waitEdit: function(){
-        if(this.el.hasClass('editable')){return;}
+        if(this.el.hasClass('editable') || this.el.hasClass('editing')){return;}
         this.el.addClass('editable')
         .on('click', this.proxy(this.edit));
     },
+    // let item not wait click for editing
     nowaitEdit: function(){
         if(this.el.hasClass('editable')){
             this.el.removeClass('editable')
             .unbind('click');
         }
     },
+    // let item do edit work
     edit: function(e){
         // disable edit button, do first to unbind all click event
         this.nowaitEdit();

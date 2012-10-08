@@ -6,9 +6,10 @@ define(['spine',
         'controller/newsItem'
         ], function(Spine, $, config,
             ArticlesController, NewsModel, NewsItemController){
+
     var NewsController = Spine.Controller.create();
 
-    var NewsController = ArticlesController.create();
+    //var NewsController = ArticlesController.create();
     NewsController.include(ArticlesController);
 
     NewsController.include({

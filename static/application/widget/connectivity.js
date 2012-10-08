@@ -6,8 +6,9 @@ define(['jquery',
 var Connectivity = {
     ping: function(){
         return $.ajax({
-            url: config.apiHost,
-            type: 'HEAD',
+            url: config.pingHost,
+            //type: 'HEAD',  // why head 405?
+            type: 'GET',
             timeout: 3 * 1000
         });
     },
@@ -29,7 +30,7 @@ var Connectivity = {
                 }
             });
 
-        }, this), 1000 * /*60 * */3); // 1 minite
+        }, this), 1000 * 60 * 3); // 1 minite
     },
     stopPing: function(){
         clearInterval(this.timer);

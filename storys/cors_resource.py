@@ -9,13 +9,14 @@ class CORSResource(Resource):
 
     # headers sent in all responses
     cors_headers = [
-        ('Access-Control-Allow-Origin',     '*'),
+        ('Access-Control-Allow-Origin',  '*'),
         ('Access-Control-Allow-Headers',    'Authorization'),
     ]
 
     # headers sent in pre-flight responses
     preflight_headers = cors_headers + [
-        ('Access-Control-Allow-Methods',    'GET'),
+        ('Access-Control-Allow-Methods', 'GET', 'HEAD', 'PUT', 'POST', 'DELETE', 'OPTIONS'),
+        #('Access-Control-Allow-Methods', '*'),
         ('Access-Control-Allow-Credentials','true')
     ]
 
@@ -24,7 +25,7 @@ class CORSResource(Resource):
         request_method = request.method.upper()
 
         # intercept OPTIONS method requests
-        if request_method == "OPTIONS":
+        if request_method == "stop_OPTIONS":
             # preflight requests don't need a body, just headers
             resp = HttpResponse()
 

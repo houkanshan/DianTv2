@@ -50,7 +50,6 @@ define(['spine',
                 this.updateStyle();
                 return;
             }
-            this.loaded();
 
             // add id (needn't)
             this.el.data('id', this.model.item.id);
@@ -64,6 +63,9 @@ define(['spine',
             }), 1);
             Animate(this.el).fadeOut(800);
             this.trigger('rendered', this.el);
+
+            // trigger statue to loaded
+            this.loaded();
         },
         updateStyle: function(newStyle){
             console.log('update style');

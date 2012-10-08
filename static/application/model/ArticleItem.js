@@ -1,6 +1,7 @@
 define(['spine', 
-        'jquery'
-        ], function(Spine, $) {
+        'jquery',
+        'app/config'
+        ], function(Spine, $, config) {
 
 var ArticleItemModel = Spine.Class.create();
 // TODO: maybe not a good idea
@@ -16,7 +17,7 @@ var emptyItem = {
 
 ArticleItemModel.extend({
     // added in init arguments
-    host: 'http://localhost:8081/api',
+    host: config.apiHost,
     name: 'article',            // abstruct
     collectionUrl: undefined,   // abstruct
     singletonUrl: undefined,    // abstruct

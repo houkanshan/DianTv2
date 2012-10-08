@@ -4,18 +4,16 @@ from piston.utils import rc, require_mime, require_extended
 from storys.models import Story, News
 
 import re
-import time
 import pdb
+import datetime
 
+def transferTime(article):
+    article.create_on = article.create_on + datetime.timedelta(hours=8)
+    return article
 
 class StorysHandler(BaseHandler):
     """ get Storys """
-    allowd_methods = ('GET', 'POST', )
-
-    # headers sent in all responses
-    cors_headers = [
-        ('Access-Control-Allow-Origin',     '*'),
-    ]
+    allowd_methods = ('GET', 'POST', 'HEAD', 'OPTIONS', )
 
     model = Story
     storys = Story.objects
@@ -37,10 +35,10 @@ class StorysHandler(BaseHandler):
             count = int(GET['count'])
             print 'find count', count
 
-        #if count != 0:
-            return self.storys.order_by('-create_on')[ (start): (start+count)]
-        #else:
-            #return self.storys.order_by('create_on')[start:]
+        got = self.storys.order_by('-create_on')[ (start): (start+count)]
+        #pdb.set_trace()
+        got = map(transferTime, got)
+        return got
 
     def create(self, request):
         '''
@@ -69,6 +67,8 @@ class StorysHandler(BaseHandler):
         title = POST['title']
         author = POST['author']
         text = POST['text']
+
+        #print 'now time' + datetime.datetime.now()
 
         new_story = Story(title=title, author=author, text=text)
 
@@ -105,7 +105,7 @@ class StorysHandler(BaseHandler):
 
 class StoryHandler(BaseHandler):
     """ get Story """
-    allowd_methods = ('GET', 'DELETE', 'PUT', )
+    allowd_methods = ('GET', 'DELETE', 'PUT', 'HEAD', )
 
     model = Story
     storys = Story.objects
@@ -199,7 +199,7 @@ class StoryHandler(BaseHandler):
 # news
 class NewsHandler(BaseHandler):
     """ get News """
-    allowd_methods = ('GET', 'POST', )
+    allowd_methods = ('GET', 'POST', 'HEAD', )
 
     model = News
     news = News.objects
@@ -290,7 +290,7 @@ class NewsHandler(BaseHandler):
 
 class NewHandler(BaseHandler):
     """ get New"""
-    allowd_methods = ('GET', 'DELETE', 'PUT', )
+    allowd_methods = ('GET', 'DELETE', 'PUT', 'HEAD', 'OPTIONS', )
 
     # headers sent in all responses
     cors_headers = [
