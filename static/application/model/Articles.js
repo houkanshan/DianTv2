@@ -16,16 +16,6 @@ ArticlesModel.extend({
         $.extend(this, Spine.Events);
     },
     curIndex: 0, 
-    //TODO: deal with boundary 
-    add: function(){
-        var option  = {
-            empty: true
-        };
-        var itemModel = new this.ItemModel({
-            option: option
-        });
-        return itemModel;
-    },
     getNext: function(){
         var modelItem = this.get();
         this.curIndex++;
@@ -36,7 +26,15 @@ ArticlesModel.extend({
         this.curIndex--;
         return modelItem;
     },
-
+   add: function(){
+        var option  = {
+            empty: true
+        };
+        var itemModel = new this.ItemModel({
+            option: option
+        });
+        return itemModel;
+    },
     get: function(){
         if(this.curIndex < 0){
             this.curIndex = 0;
@@ -47,7 +45,7 @@ ArticlesModel.extend({
             count: 1
         };
 
-        (this.curIndex < 0) && (option.empty = true);
+        //(this.curIndex < 0) && (option.empty = true);
 
         var itemModel = new this.ItemModel({
             option: option

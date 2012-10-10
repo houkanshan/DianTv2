@@ -332,7 +332,8 @@ input {
   vertical-align: center; }
 
 p {
-  font-size: 100%; }
+  font-size: 100%;
+  margin-bottom: 5px; }
 
 img {
   max-width: 100%;
@@ -392,7 +393,7 @@ header {
     /*background: $white;*/
     border-radius: 3px 3px 0 0; }
 
-/*content*/
+/* article */
 article {
   /*layout*/
   /*style*/ }
@@ -424,7 +425,7 @@ article {
     font-size: 0.9em; }
   .big .content, .tiny .content {
     overflow: hidden;
-    font-size: 20px;
+    font-size: 18px;
     /*margin-top: $gridSpacing;*/
     /*word-break: break-all;  */
     word-wrap: break-word; }

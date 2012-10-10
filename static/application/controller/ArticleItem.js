@@ -68,7 +68,6 @@ define(['spine',
             this.loaded();
         },
         updateStyle: function(newStyle){
-            console.log('update style');
             // outer style set
             $.extend(this.style, newStyle);
             if(this.style.css){
@@ -98,7 +97,6 @@ define(['spine',
         destory: function(){
             return Animate(this.el).fadeIn(500)
             .done(this.proxy(function(){
-                console.log('destoryed');
                 this.trigger('destoryed');
                 this.release();
             }));
@@ -108,16 +106,13 @@ define(['spine',
             // is loading now, do noting
             if(this.isLoading){return}
             // not loading state, do loading
-            console.log(this.name + 'loadling');
 
             this.el.addClass('loading');
             this.trigger('loading');
         },
         loaded: function(){
-            console.log(this.name + 'loaded');
-
             this.el.removeClass('loading');
-            this.trigger('loaded');
+            this.trigger('loaded', this.model);
         }
     });
 

@@ -21,6 +21,7 @@ input {
 }
 p {
     font-size: 100%;
+    margin-bottom: 5px;
 }
 img {
     max-width: 100%;
@@ -109,7 +110,7 @@ header {
 }
 
 
-/*content*/
+/* article */
 article {
     /*layout*/
     .main {
@@ -118,9 +119,9 @@ article {
         height: 100%;
 
         float: left;
+        
     }
     .aside {
-
     }
     /*style*/
     .main {
@@ -158,7 +159,7 @@ article {
 
     .content {
         overflow:hidden;
-        font-size: 20px;
+        font-size: 18px;
         /*margin-top: $gridSpacing;*/
         /*word-break: break-all;  */
         word-wrap: break-word;  

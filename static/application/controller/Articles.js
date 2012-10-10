@@ -80,7 +80,6 @@ define(['spine',
             var dfd = $.Deferred();
 
             (function _hideOne(){
-                console.log('hide timer: run');
                 if(this.itemControllerList.length === 0){
                     dfd.resolve();
                     return;
@@ -88,7 +87,6 @@ define(['spine',
 
                 var curItem  = this.itemControllerList.pop();
                 curItem.destory();
-                console.log('hide timer: done');
 
                 // check if item is the last
                 if(this.itemControllerList.length === 0){
@@ -114,9 +112,25 @@ define(['spine',
         // show control: fetch items and render elem
         showItems: function(iterName){
             //the show animate is defined here
+            var exceedNum = 0;
+            function checkExceed(item){
+                console.log('check:', item);
+
+                // fetched but no item
+                if(!item){
+                    exceedNum ++;
+                }
+                console.log(exceedNum);
+                if(exceedNum >= this.option.itemControllerListLength){
+                    // do next samply
+                    this.goNext();
+                }
+                
+            }
             for(var i = this.option.itemControllerListLength; i--;){
                 // get item's model
                 var itemModel = this.model[iterName]();
+                itemModel.bind('fetched', this.proxy(checkExceed));
 
                 // get item's controller
                 var option = {
@@ -132,7 +146,6 @@ define(['spine',
                 this.itemControllerList.push(itemController);
             }
 
-            console.log(this.name+':allrendered');
             Spine.trigger(this.name+':allrendered');
         },
         showPrevItems: function(){
@@ -142,7 +155,7 @@ define(['spine',
         },
         showNextItems: function(){
             this.showItems('getNext');
-        }
+        },
     });
 
     return ArticlesController;

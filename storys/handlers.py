@@ -81,7 +81,7 @@ class StorysHandler(BaseHandler):
 
         new_story.save()
 
-        return new_story
+        return [new_story]
 
     def delete(self, request):
         '''
@@ -191,7 +191,7 @@ class StoryHandler(BaseHandler):
 
         update_story.save()
 
-        return update_story
+        return [update_story]
 
 
 
@@ -222,10 +222,9 @@ class NewsHandler(BaseHandler):
             count = int(GET['count'])
             print 'find count', count
 
-        #if count != 0:
-            return self.news.order_by('-create_on')[ (start): (start+count)]
-        #else:
-            #return self.news.order_by('create_on')[start:]
+        got = self.news.order_by('-create_on')[ (start): (start+count)]
+        got = map(transferTime, got)
+        return got
 
     def create(self, request):
         '''
@@ -266,7 +265,7 @@ class NewsHandler(BaseHandler):
 
         new_news.save()
 
-        return new_news
+        return [new_news]
 
     def delete(self, request):
         '''
@@ -382,5 +381,5 @@ class NewHandler(BaseHandler):
 
         update_new.save()
 
-        return update_new
+        return [update_new]
 

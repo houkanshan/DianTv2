@@ -8,6 +8,7 @@ var ArticleItemModel = Spine.Class.create();
 //ArticleItemModel.extend(Spine.Events);
 //
 
+// use to make new editable article
 var emptyItem = {
     title: ' ',
     author: ' ',
@@ -99,10 +100,10 @@ ArticleItemModel.extend({
         return item;
     },
     // model control
+    //    _getEmpty need to be discarded
     _getEmpty: function(){
-        console.log('get a empty item');
         this.item = this._deepcp(emptyItem);
-        this.trigger('fetched');
+        this.trigger('fetched', this.item);
     },
     _read: function() {
         $.get(this.host + this.collectionUrl, this.option)
@@ -110,6 +111,9 @@ ArticleItemModel.extend({
             // TODO: need decorate
             if(res.length !== 0){
                 this.item = this._format2client(res[0]);
+            }
+            else {
+                this.exceed = true;
             }
             this.trigger('fetched', this.item);
         }))
@@ -126,6 +130,9 @@ ArticleItemModel.extend({
             data: article
         })
         .done(this.proxy(function(res){
+            if(res.length !== 0){
+                this.item = this._format2client(res[0]);
+            }
             this.trigger('fetched', this.item);
         }))
         .fail(this.proxy(function(res){
@@ -142,7 +149,10 @@ ArticleItemModel.extend({
             type: 'PUT',
             data: article
         })
-        .done(this.proxy(function(){
+        .done(this.proxy(function(res){
+            if(res.length !== 0){
+                this.item = this._format2client(res[0]);
+            }
             //this.trigger('fetched');
         }))
         .fail(this.proxy(function(){

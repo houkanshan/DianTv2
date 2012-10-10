@@ -26,7 +26,6 @@ define(['spine', 'jquery'], function(Spine, $) {
 
                 //send refresh msg
                 // TODO
-                console.log('trigger:time:step');
                 Spine.trigger('timer:step');
             }),
             timerStep);
