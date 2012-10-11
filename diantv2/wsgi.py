@@ -14,6 +14,14 @@ framework.
 
 """
 import os
+import sys
+from django.core.handlers.wsgi import WSGIHandler
+
+current_dir = os.path.dirname(__file__)
+parent_dir = os.path.dirname(current_dir)
+
+sys.path.append(current_dir) 
+sys.path.append(parent_dir)
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "diantv2.settings")
 
