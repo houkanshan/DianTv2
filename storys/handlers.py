@@ -30,10 +30,10 @@ class StorysHandler(BaseHandler):
         count = 10
         if (('start' in GET) and (GET['start'] != '')):
             start = int(GET['start'])
-            print 'find start', start
+            #print 'find start', start
         if (('count' in GET) and (GET['count'] != '')):
             count = int(GET['count'])
-            print 'find count', count
+            #print 'find count', count
 
         got = self.storys.order_by('-create_on')[ (start): (start+count)]
         #pdb.set_trace()
@@ -88,7 +88,7 @@ class StorysHandler(BaseHandler):
         delete storys
         Current fobidden
         '''
-        print "get delete"
+        #print "get delete"
         GET = self.flatten_dict(request.GET)
 
         return rc.FORBIDDEN
@@ -217,10 +217,10 @@ class NewsHandler(BaseHandler):
         count = 10
         if (('start' in GET) and (GET['start'] != '')):
             start = int(GET['start'])
-            print 'find start', start
+            #print 'find start', start
         if (('count' in GET) and (GET['count'] != '')):
             count = int(GET['count'])
-            print 'find count', count
+            #print 'find count', count
 
         got = self.news.order_by('-create_on')[ (start): (start+count)]
         got = map(transferTime, got)
@@ -272,7 +272,7 @@ class NewsHandler(BaseHandler):
         delete news
         Current fobidden
         '''
-        print "get delete"
+        #print "get delete"
         GET = self.flatten_dict(request.GET)
 
         return rc.FORBIDDEN
