@@ -155,7 +155,7 @@ define(['spine',
         },
         showNextItems: function(){
             this.showItems('getNext');
-        },
+        }
     });
 
     return ArticlesController;
