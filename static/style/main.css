@@ -325,7 +325,7 @@ html, body {
   font-family: georgia,'times new roman', 'Microsoft Yahei', serif; }
 
 body {
-  background: #fffff7; }
+  background: #fff1e0; }
 
 input {
   border: 1px solid #dfdfdf;
@@ -359,7 +359,7 @@ article {
 /*header*/
 header {
   text-align: center;
-  color: #fffff7; }
+  color: #fff1e0; }
   header .mod-right, header .mod-left {
     line-height: 54px; }
   header .logo {
@@ -387,7 +387,7 @@ header {
   line-height: 54px;
   margin-left: 10px;
   text-decoration: none;
-  color: #fffff7; }
+  color: #fff1e0; }
   .menu .iconbtn:hover {
     color: #8f8f8f;
     /*background: $white;*/
@@ -454,7 +454,7 @@ article {
       left: 50%;
       margin-left: -3em;
       margin-top: -1em;
-      color: #fffff7;
+      color: #fff1e0;
       background: black;
       border-radius: 8px; }
   .big .editable, .tiny .editable {
@@ -542,12 +542,12 @@ article {
     float: right; }
   .pic .url-field {
     overflow: hidden;
-    background: #fffff7; }
+    background: #fff1e0; }
 
 /* save-btn-mod */
 .save-btn {
   background: #2e6e9e;
-  color: #fffff7;
+  color: #fff1e0;
   border: none; }
 
 /* del-btn-mod */
