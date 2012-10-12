@@ -9,7 +9,7 @@
     </head>
     <body>
         <header>
-            <div class="logo"> <h1>Dian Times</h1>
+            <div class="logo"> <h1>DianTimes</h1>
                 <span class="message">www.dian.org.cn/tv</span>
             </div>
             <div class="date mod-left">
@@ -52,8 +52,8 @@
         <!--<section class="story tiny">-->
             <div class="hd">
                 <input type="button" class="button save-btn" value="保存" />
-                <h2 class="title editable">{{title}}</h2>
-                <span class="author editable">{{author}}</span>
+                <h2 class="title editable" placeholder="Title">{{title}}</h2>
+                <span class="author editable" placeholder="Name">{{author}}</span>
                 <span class="pubtime">{{create_on}}</span>
             </div>
             <div class="bd">
@@ -67,9 +67,9 @@
 
                     <input type="button" class="button set-btn" value="添加图片" />
                     <a href="javascript:;" class="del-btn">×</a>
-                    <div class="url-field editable">{{img.url}}</div>
+                    <div class="url-field editable" >{{img.url}}</div>
                 </div>
-                <div class="content editable">
+                <div class="content editable" placeholder="Content">
                     {{#each content}}
                     <p>{{this}}</p>
                     {{/each}}
@@ -77,31 +77,4 @@
             </div>
         <!--</section>-->
     </script>
-    <script id="editTmpl" type="text/x-handlebars-template">
-        <!--<section class="story tiny">-->
-            <div class="hd">
-                <input type="button" value="保存" class="button save-btn"/>
-                <h2 class="title" >
-                    <input type="input" value="{{title}}" name="title" />
-                </h2>
-                <span class="author">
-                    <input type="input" value="{{author}}" name="author"/>
-                </span>
-                <span class="pubtime">{{create_on}}</span>
-                <!--<input type="input" value="{{create_on}}" name="create_on" class="pubtime" />-->
-            </div>
-            <div class="bd">
-                <div class="pic">
-                    <img src="{{img}}" alt="{{title}}" class="img-field" />
-                    <a href="javascript:;" class="set-btn">添加图片</a>
-                    <a href="javascript:;" class="del-btn">x</a>
-                    <input type="input" value="{{img}}" name="pic" class="url-field"/>
-                </div>
-                <div class="content">
-                    <textarea name="content" rows="10"  cols="30">{{content}}</textarea>
-                </div>
-            </div>
-        <!--</section>-->
-    </script>
-
 </html>

@@ -11,6 +11,7 @@ html, body {
     height: 100%;
     overflow: hidden;
     font-size: 16px;
+    font-family: georgia,'times new roman', 'Microsoft Yahei', serif;
 }
 body {
     background: $contentBlackground;
@@ -224,6 +225,10 @@ article {
     .url-field {
         @extend %one-line;
     }
+
+    .no-text {
+        color: $darkGray;
+    }
 }
 
 /* box-mod-edit */
@@ -252,7 +257,7 @@ article {
     }
 
     .pic {
-        background: $orange;
+        background: $darkGray;
     }
 }
 

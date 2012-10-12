@@ -22,13 +22,28 @@ define(['spine',
         },
         render: function(){
             //this.el.append(this.template(article));
+            var editableEls = this.el.find('.editable');
             if(!this.isEditing){
                 this.el.removeClass('editing');
-                this.el.find('.editable').attr('contenteditable', false);
+                editableEls.attr('contenteditable', false);
             }
             else {
                 this.el.addClass('editing');
-                this.el.find('.editable').attr('contenteditable', true);
+                editableEls.attr('contenteditable', true);
+
+                editableEls.each(function(index, elem){
+                    var elem = $(elem);
+                    if ( elem.text().trim().length === 0 ) {
+                        elem.text(elem.attr('placeholder'));
+                        elem.addClass('no-text');
+
+                        elem.bind('focus', function(evt){
+                            elem.text('');
+                            elem.remove('.no-text');
+                            elem.unbind('focus');
+                        });
+                    }
+                })
             }
 
             // handle img
@@ -62,12 +77,12 @@ define(['spine',
             var editableEl =  this.el.find('.editable').not('.url-field');
             var isComp = true;
             editableEl.each(function(index, elem){
-                if($(elem).text().trim().length === 0){
+                elem = $(elem);
+                if(elem.text().trim().length === 0 || elem.hasClass('no-text')){
                     isComp = false;
                 }
             });
             return isComp;
-
         },
         edit: function(){
             this.isEditing = true;

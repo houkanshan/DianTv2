@@ -322,7 +322,8 @@ html, body {
   margin: 0;
   height: 100%;
   overflow: hidden;
-  font-size: 16px; }
+  font-size: 16px;
+  font-family: georgia,'times new roman', 'Microsoft Yahei', serif; }
 
 body {
   background: #fffff7; }
@@ -468,6 +469,8 @@ article {
     overflow: hidden; }
   .big .author, .tiny .author {
     display: inline-block; }
+  .big .no-text, .tiny .no-text {
+    color: #8f8f8f; }
 
 /* box-mod-edit */
 .editing.big .title, .editing.tiny .editing.big .title, .editing.big .editing.tiny .title, .editing.big .editing.tiny .title, .editing.tiny .editing.big .title, .editing.tiny .title, .editing.big .bd, .editing.tiny .editing.big .bd, .editing.big .editing.tiny .bd, .editing.big .editing.tiny .bd, .editing.tiny .editing.big .bd, .editing.tiny .bd {
@@ -482,7 +485,7 @@ article {
   display: block;
   margin-left: 10px; }
 .editing.big .pic, .editing.tiny .pic {
-  background: #fff6ed; }
+  background: #8f8f8f; }
 
 /* big-mod */
 .big {
