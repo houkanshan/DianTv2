@@ -37,7 +37,7 @@ require.config({
 
 
 // run application
-require(['jquery'], function($) {
+require(['jquery', 'script/lang'], function($) {
     if (debugOn) {
         // auto refresh page for debug
         require(['lib/live.js']);

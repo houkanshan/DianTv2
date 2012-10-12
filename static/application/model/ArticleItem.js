@@ -89,6 +89,7 @@ ArticleItemModel.extend({
         var item = this._deepcp(res);
 
         item.text = item.content.join('\n');
+        $.trim(item.text);
         delete item.content
 
         if(item.img){
