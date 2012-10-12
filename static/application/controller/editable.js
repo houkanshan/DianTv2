@@ -38,8 +38,8 @@ define(['spine',
                         elem.addClass('no-text');
 
                         elem.bind('focus', function(evt){
-                            elem.text('');
-                            elem.remove('.no-text');
+                            elem.text(' ');
+                            elem.removeClass('no-text');
                             elem.unbind('focus');
                         });
                     }
