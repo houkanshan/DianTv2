@@ -1,8 +1,10 @@
 define([], function(){
     var config = {
         //view
-        apiHost: 'http://192.168.7.193/diantv/api',
-        pingHost: 'http://192.168.7.193/diantv/api/storys/?start=0&count=0',
+        //apiHost: 'http://192.168.7.193/diantv/api',
+        apiHost: 'http://localhost:8081/api',
+        //pingHost: 'http://192.168.7.193/diantv/api/storys/?start=0&count=0',
+        pingHost: 'http://localhost:8081/api/storys/?start=0&count=0',
         storysNum: 3,
         newsNum: 1,
         hideStep: 200,
