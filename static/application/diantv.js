@@ -14,9 +14,11 @@ define(['spine',
         'controller/screen',
         'controller/action',
         'controller/message',
-        'widget/connectivity'
+        'widget/connectivity',
+        'widget/weather'
         ], function(Spine, $, config, route, 
-            Header, Storys, News, Screen, Action, Message, Connectivity) {
+            Header, Storys, News, Screen, Action, Message, 
+            Connectivity, Weather) {
 
     var DianTv = Spine.Controller.create({
         el: $('body'),
@@ -39,11 +41,16 @@ define(['spine',
                 this.message.add(id, helps[id]);
             }
 
+            // widget init
             Connectivity.startPing(function(){
                 Spine.trigger('msg:error:start', '连接断了...')
             }, 
             function(){
                 Spine.trigger('msg:error:end');
+            });
+            Weather.startGet(function(text){
+                $('.weather').text(text);
+                console.log(text);
             });
 
             

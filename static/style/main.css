@@ -303,10 +303,6 @@ cite {
 .tiny .url-field, .tiny .pic.no-img img, .tiny.editing .pic.no-img .del-btn, .tiny.editing .pic.has-img .set-btn, .tiny.editing .pic.has-img .url-field {
   display: none; }
 
-header .mod-right, header .mod-left {
-  position: absolute;
-  top: 0; }
-
 /*length*/
 /*color*/
 @font-face {
@@ -358,21 +354,23 @@ article {
 
 /*header*/
 header {
+  overflow: hidden;
   text-align: center;
   color: #fff1e0; }
   header .mod-right, header .mod-left {
-    line-height: 54px; }
+    line-height: 54px;
+    /*margin-top: -$headerHeight;*/ }
   header .logo {
     display: inline;
     display: inline-block; }
     header .logo, header .logo h1 {
       line-height: 1; }
   header .mod-right {
-    right: 10px;
-    top: 0; }
+    float: right;
+    margin-left: 10px; }
   header .mod-left {
-    left: 10px;
-    top: 0; }
+    float: left;
+    margin-right: 10px; }
   header .message {
     font-size: 14px; }
 

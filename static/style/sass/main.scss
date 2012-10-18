@@ -57,7 +57,9 @@ article {
 header {
     %header-mod {
         line-height: $headerHeight;
+        /*margin-top: -$headerHeight;*/
     }
+    overflow: hidden;
     text-align: center;
     color: $whiteFront;
     .logo {
@@ -66,16 +68,14 @@ header {
         &, h1{ line-height: 1;}
     }
     .mod-right {
-        @extend %absolute;
         @extend %header-mod;
-        right: $gridSpacing;
-        top: 0;
+        float: right;
+        margin-left: $gridSpacing;
     }
     .mod-left {
-        @extend %absolute;
         @extend %header-mod;
-        left: $gridSpacing;
-        top: 0;
+        float: left;
+        margin-right: $gridSpacing;
     }
     .message {
         font-size: 14px;
