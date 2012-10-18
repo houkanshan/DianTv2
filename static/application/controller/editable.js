@@ -59,8 +59,12 @@ define(['spine',
                 author: $elem.find('.author').text().trim(),
                 // content need format
                 content: $elem.find('.content').contents().map(function(index, elem){
-                    return elem.textContent;
-                }).get(),
+                    return elem.textContent.trim();
+                })
+                .filter(function(i, e){
+                    return  e && e.length;
+                })
+                .get(),
                 img: (function(){
                     var img = $elem.find('.pic img');
                     var url = img.attr('src');

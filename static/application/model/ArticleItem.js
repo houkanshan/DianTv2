@@ -68,7 +68,8 @@ ArticleItemModel.extend({
         var item = this._deepcp(res);
         item.create_on = this._formatTime(res.create_on);
 
-        item.content = item.text.split('\n');
+        item.content = item.text.split(/\s*\n/);
+        
         delete item.text;
 
         item.img = {};

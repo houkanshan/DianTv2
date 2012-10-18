@@ -1,4 +1,4 @@
-var debugOn = false;
+var debugOn = true;
 // Global require config
 require.config({
     baseUrl: '.',
