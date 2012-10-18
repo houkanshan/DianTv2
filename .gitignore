@@ -2,3 +2,6 @@
 *.db
 *.pyc
 .*
+
+*settings.py
+*config.js

@@ -1,8 +1,8 @@
 define([], function(){
     var config = {
         //view
-        apiHost: 'http://www.dian.org.cn/tv/diantv/api',
-        pingHost: 'http://www.dian.org.cn/tv/diantv/api/storys/?start=0&count=0',
+        apiHost: 'http://' + window.location.hostname + '/tv/diantv/api',
+        pingHost: 'http://' + window.location.hostname + '/tv/diantv/api/storys/?start=0&count=0',
         //apiHost: 'http://192.168.7.193/tv/diantv/api',
         //pingHost: 'http://192.168.7.193/tv/diantv/api/storys/?start=0&count=0',
         storysNum: 3,
