@@ -3,5 +3,6 @@
 *.pyc
 .*
 
-*settings.py
-*config.js
+settings.py
+
+config.js
