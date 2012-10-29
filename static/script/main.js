@@ -10,6 +10,7 @@ require.config({
         'spine': 'lib/spine',
         'route': 'lib/route',
         'handlebars': 'lib/handlebars',
+        'dcss': 'lib/dcss/dcss',
 
         // Mod
         'app': 'application',

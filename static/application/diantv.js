@@ -7,6 +7,7 @@ define(['spine',
         'jquery', 
         'app/config', 
         'route',
+        'dcss',
         // module load
         'controller/header',
         'controller/storys', 
@@ -16,7 +17,7 @@ define(['spine',
         'controller/message',
         'widget/connectivity',
         'widget/weather'
-        ], function(Spine, $, config, route, 
+        ], function(Spine, $, config, route, dcss,
             Header, Storys, News, Screen, Action, Message, 
             Connectivity, Weather) {
 
@@ -63,7 +64,10 @@ define(['spine',
             this.screen = new Screen({storysNum: config.storysNum});
             //temp no-use
             this.screen.bind('storys:style:update', this.proxy(function(style){
-                this.storys.trigger('style:update', style);
+                //this.storys.trigger('style:update', style);
+                dcss.rule('.story', {height: style.styleFunc.outerHeight + 'px'});
+                dcss.render();
+
             }));
             // do first screen render
             this.screen.render();
