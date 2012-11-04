@@ -1,4 +1,5 @@
 define(['spine', 
+
         'jquery', 
         'app/config',
         'controller/Articles',
@@ -14,7 +15,7 @@ define(['spine',
     StorysController.include({
         name: 'storys',
         className: 'aside',
-        parentEl: $('article'),
+        parentEl: 'article',
         Model: StorysModel,
         ItemController: StoryItemController,
         option: {
@@ -31,7 +32,6 @@ define(['spine',
             });
 
             Spine.bind('storys:add', this.proxy(this.add));
-
         },
         add: function(){
             //TODO: finish add

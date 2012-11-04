@@ -35,7 +35,6 @@ define(['spine',
             Spine.bind('all:prev', this.proxy(this.goPrev));
             Spine.bind('all:goto', this.proxy(this.go));
 
-
             // do the first fetch, now start
             this.goNext();
         },
@@ -50,7 +49,7 @@ define(['spine',
          * --self contorl
          */
         render: function(){
-            this.el.appendTo(this.parentEl);
+            this.el.appendTo($(this.parentEl));
         },
         go: function(index){
             this.hideItems()

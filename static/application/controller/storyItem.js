@@ -13,10 +13,11 @@ StoryItemController.include(ArticleItemController);
 StoryItemController.include({
     name: 'story',
     className: 'story tiny',
-    template: Handlebars.compile($('#storyTmpl').html()),
     init: function(){
         // FIXME: not a good idea
         this.__parent__.init.call(this);
+
+        this.template = Handlebars.compile($('#storyTmpl').html());
 
         this.bind('editable', this.editable);
         this.bind('rendered', this.editable);

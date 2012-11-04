@@ -11,7 +11,12 @@ define(['spine',
     NewsItemController.include({
         name: 'news',
         className: 'news big',
-        template: Handlebars.compile($('#newsTmpl').html())
+        init: function(){
+            // FIXME: rewrite inhert method
+            this.__parent__.init.call(this);
+
+            this.template = Handlebars.compile($('#newsTmpl').html());
+        }
     });
     return NewsItemController;
 });

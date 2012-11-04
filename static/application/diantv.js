@@ -64,9 +64,9 @@ define(['spine',
             this.screen = new Screen({storysNum: config.storysNum});
             //temp no-use
             this.screen.bind('storys:style:update', this.proxy(function(style){
-                //this.storys.trigger('style:update', style);
-                dcss.rule('.story', {height: style.styleFunc.outerHeight + 'px'});
-                dcss.render();
+                this.storys.trigger('style:update', style);
+                /*dcss.rule('.story', {height: style.styleFunc.outerHeight + 'px'});
+                dcss.render();*/
 
             }));
             // do first screen render
