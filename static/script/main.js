@@ -46,7 +46,9 @@ require(['jquery', 'script/lang'], function($) {
 
     require(['application/diantv'], function(DianTv) {
         // run !
-        new DianTv();
+        $(document).ready(function(){
+            new DianTv();
+        });
     });
 });
 
