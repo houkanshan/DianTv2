@@ -8,3 +8,13 @@ Django, Spine, Requirejs, Sass, Handlebars, jQuery
 
 
 Front-End files in /static
+
+#TODO LIST:
+
+1 requirejs version tag for deploy manage.
+
+2 apply DCSS fully
+
+3 add Brithday system
+
+4 add BBS notification
